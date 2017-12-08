@@ -1,0 +1,9 @@
+namespace it.unisa
+
+participant Utente identified by idUtente {
+	o String idUtente
+	o String nomeUtente
+	o String email
+	o String password
+	o Boolean statoRegistrazione optional default = false
+}
