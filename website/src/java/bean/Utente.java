@@ -2,11 +2,15 @@ package bean;
 
 public class Utente {
 
+	private final String $class = "it.unisa.Utente";
 	private String idUtente;
 	private String nomeUtente;
 	private String email;
 	private String password;
 	private Boolean statoRegistrazione;
+
+	public Utente() {
+	}
 
 	public Utente(String nomeUtente, String email, String password) {
 		this.nomeUtente = nomeUtente;
