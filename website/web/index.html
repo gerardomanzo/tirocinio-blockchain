@@ -18,7 +18,7 @@
 	<body>
 
 		<div id="wrapper">
-			
+
 			<!-- SideBar -->
 			<div id="sidebar-wrapper">
 				<ul class="sidebar-nav">
@@ -32,7 +32,7 @@
 
 			<!-- Page -->
 			<div id="page-content-wrapper">
-				
+
 				<!-- Header -->
 				<header>
 					<nav class="navbar navbar-expand-lg">
@@ -49,12 +49,12 @@
 						<div class="row">
 							<div class="col-lg-4 offset-lg-4 col-md-8 offset-md-2">
 								<div class="login-form">
-									<form>
+									<form method="POST" action="Login">
 										<h1>
 											<i class="fa fa-user-circle"></i> Login
 										</h1>
-										<input id="email" type="text" placeholder="Email" />
-										<input id="password" type="password" placeholder="Password" />
+										<input id="email" type="text" placeholder="Email" name="email"/>
+										<input id="password" type="password" placeholder="Password" name="password"/>
 										<button>Entra!</button>
 										<span>Per usare l'applicazione &egrave; necessario un account.<br>
 											<a href="registrazione.html">Creane uno!</a>
@@ -70,16 +70,16 @@
 				<!-- Footer -->
 				<footer> </footer>
 				<!-- /Footer -->
-				
+
 			</div>
 			<!-- /Page -->
-			
+
 		</div>
 
 		<script src="./js/jquery.js"></script>
 		<script src="./js/popper.js"></script>
 		<script src="./js/bootstrap.js"></script>
 		<script src="./js/offcanvas.js"></script>
-		
+
 	</body>
 </html>
