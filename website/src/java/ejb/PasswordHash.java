@@ -4,9 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 @Stateless
+@LocalBean
 public class PasswordHash {
 
 	private final MessageDigest crypt;
