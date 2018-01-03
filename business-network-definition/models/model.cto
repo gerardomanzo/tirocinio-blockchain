@@ -7,3 +7,7 @@ participant Utente identified by idUtente {
 	o String password
 	o Boolean statoRegistrazione optional default = false
 }
+
+transaction ConfermaRegistrazioneUtente {
+	--> Utente utente
+}
