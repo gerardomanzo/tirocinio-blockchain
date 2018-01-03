@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Home Page</title>
+		<title>Dashboard admin</title>
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -45,12 +45,15 @@
 
 				<!-- Main -->
 				<%
-					Boolean login = (Boolean) session.getAttribute("login");
-					if (login != null || login.booleanValue()) {
+					Boolean login = (Boolean) session.getAttribute("loginAdmin");
+					if (login != null && login.booleanValue()) {
 				%>
 				<section>
 					<div class="container-fluid">
 						<h1 class="text-center">Benvenuto amministratore!</h1>
+						<ul>Operazioni disponibili
+							<li><a href="ConfermaUtente">Conferma registrazione Utente</a></li>
+						</ul>
 					</div>
 				</section>				
 				<%
