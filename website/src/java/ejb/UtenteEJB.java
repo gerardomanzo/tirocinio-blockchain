@@ -3,6 +3,8 @@ package ejb;
 import bean.Utente;
 import com.google.gson.Gson;
 import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -81,5 +83,28 @@ public class UtenteEJB {
 			return result[0];
 		}
 		return null;
+	}
+
+	public List<Utente> cercaNonRegistrati() {
+		Response response = CLIENT.target(URI_QUERY + "/findNotRegistered")
+				.request()
+				.get();
+
+		String body = response.readEntity(String.class);
+
+		Utente[] result = gson.fromJson(body, Utente[].class);
+
+		return Arrays.asList(result);
+	}
+
+	public void confermaUtente(String idUtente) {
+		
+		String json = "{\"utente\": \"resource:it.unisa.Utente#" + idUtente + "\"}";
+		
+		System.out.println(json);
+		
+		Response response = CLIENT.target("http://169.51.23.2:31090/api/ConfermaRegistrazioneUtente")
+				.request()
+				.post(Entity.entity(json, MediaType.APPLICATION_JSON));
 	}
 }
