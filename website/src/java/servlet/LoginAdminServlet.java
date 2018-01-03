@@ -22,8 +22,8 @@ public class LoginAdminServlet extends HttpServlet {
 
 		if (email.equals("admin@tirocinio-blockchain.it") && password.equals(pwHash.hash("20171225"))) {
 			HttpSession session = request.getSession();
-			session.removeAttribute("login");
-			session.setAttribute("login", Boolean.TRUE);
+			session.removeAttribute("loginAdmin");
+			session.setAttribute("loginAdmin", Boolean.TRUE);
 		}
 		RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboard.jsp");
 		dispatcher.forward(request, response);
