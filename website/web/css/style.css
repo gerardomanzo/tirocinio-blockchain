@@ -204,7 +204,7 @@ footer {
 	text-transform: uppercase;
 	color: #ffffff;
 	-webkit-transition: all 0.3 ease;
-	transition: all 0.3 ease;
+	transition: all 0.3s ease;
 	cursor: pointer;
 }
 
@@ -221,3 +221,10 @@ footer {
 	margin: 0.5rem;
 }
 /* /Box */
+
+/* Table head */
+.thead-blue {
+	background: rgba(50, 93, 136, 1);
+	color: white;
+}
+/* /Table head */
