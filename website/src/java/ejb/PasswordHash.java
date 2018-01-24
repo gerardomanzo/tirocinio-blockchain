@@ -11,15 +11,15 @@ import javax.ejb.Stateless;
 @LocalBean
 public class PasswordHash {
 
-	private final MessageDigest crypt;
+    private final MessageDigest crypt;
 
-	public PasswordHash() throws NoSuchAlgorithmException {
-		crypt = MessageDigest.getInstance("SHA-256");
-	}
+    public PasswordHash() throws NoSuchAlgorithmException {
+        crypt = MessageDigest.getInstance("SHA-256");
+    }
 
-	public String hash(String string) throws UnsupportedEncodingException {
-		crypt.reset();
-		crypt.update(string.getBytes("UTF-8"));
-		return new BigInteger(1, crypt.digest()).toString(16);
-	}
+    public String hash(String string) throws UnsupportedEncodingException {
+        crypt.reset();
+        crypt.update(string.getBytes("UTF-8"));
+        return new BigInteger(1, crypt.digest()).toString(16);
+    }
 }

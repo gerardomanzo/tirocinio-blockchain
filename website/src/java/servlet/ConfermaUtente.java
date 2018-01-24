@@ -14,53 +14,53 @@ import javax.servlet.http.HttpSession;
 
 public class ConfermaUtente extends HttpServlet {
 
-	@Inject
-	private UtenteEJB utenteEJB;
+    @Inject
+    private UtenteEJB utenteEJB;
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
 
-		Boolean isAdminLogged = (Boolean) session.getAttribute("loginAdmin");
+        Boolean isAdminLogged = (Boolean) session.getAttribute("loginAdmin");
 
-		if (isAdminLogged) {
-			List<Utente> lista = utenteEJB.cercaNonRegistrati();
+        if (isAdminLogged) {
+            List<Utente> lista = utenteEJB.cercaNonRegistrati();
 
-			session.removeAttribute("utentiNonRegistrati");
-			session.setAttribute("utentiNonRegistrati", lista);
+            session.removeAttribute("utentiNonRegistrati");
+            session.setAttribute("utentiNonRegistrati", lista);
 
-			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/confermaUtente.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboard.jsp");
-			dispatcher.forward(request, response);
-		}
-	}
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/confermaUtente.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboardAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
 
-		Boolean isAdminLogged = (Boolean) session.getAttribute("loginAdmin");
+        Boolean isAdminLogged = (Boolean) session.getAttribute("loginAdmin");
 
-		if (isAdminLogged) {
+        if (isAdminLogged) {
 
-			String idUtente = request.getParameter("idUtente");
+            String idUtente = request.getParameter("idUtente");
 
-			if (idUtente != null && !idUtente.equals("")) {
-				utenteEJB.confermaUtente(idUtente);
-			}
-			List<Utente> lista = utenteEJB.cercaNonRegistrati();
+            if (idUtente != null && !idUtente.equals("")) {
+                utenteEJB.confermaUtente(idUtente);
+            }
+            List<Utente> lista = utenteEJB.cercaNonRegistrati();
 
-			session.removeAttribute("utentiNonRegistrati");
-			session.setAttribute("utentiNonRegistrati", lista);
+            session.removeAttribute("utentiNonRegistrati");
+            session.setAttribute("utentiNonRegistrati", lista);
 
-			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/confermaUtente.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboard.jsp");
-			dispatcher.forward(request, response);
-		}
-	}
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/confermaUtente.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboardAdmin.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
 
 }
