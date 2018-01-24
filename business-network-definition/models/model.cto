@@ -5,7 +5,13 @@ participant Utente identified by idUtente {
 	o String nomeUtente
 	o String email
 	o String password
-	o Boolean statoRegistrazione optional default = false
+	o Boolean statoRegistrazione default = false
+}
+
+asset Criterio identified by idCriterio {
+	o String idCriterio
+	o String nomeCriterio
+	o Integer maxPunteggio default = 10
 }
 
 transaction ConfermaRegistrazioneUtente {
