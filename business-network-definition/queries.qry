@@ -2,26 +2,33 @@ query findByEmail{
   description: "Seleziona l'utente con email = PARAM"
   statement:
       SELECT it.unisa.Utente
-          WHERE (email == _$param)
+      WHERE (email == _$param)
 }
 
 query findByUsername{
   description: "Seleziona l'utente con nomeUtente = PARAM"
   statement:
       SELECT it.unisa.Utente
-          WHERE (nomeUtente == _$param)
+      WHERE (nomeUtente == _$param)
 }
 
 query findByEmailPassword{
   description: "Seleziona l'utente con email = PARAM1 e password = PARAM2"
   statement:
       SELECT it.unisa.Utente
-          WHERE (email == _$email AND password == _$password)
+      WHERE (email == _$email AND password == _$password)
 }
 
 query findNotRegistered{
   description: "Seleziona gli utenti la cui registrazione non è stata confermata"
   statement:
       SELECT it.unisa.Utente
-          WHERE (statoRegistrazione == false)
+      WHERE (statoRegistrazione == false)
+}
+
+query findByNomeCriterio{
+  description: "Seleziona il criterio con nomeCriterio = PARAM"
+  statement:
+      SELECT it.unisa.Criterio
+      WHERE (nomeCriterio == _$param)
 }

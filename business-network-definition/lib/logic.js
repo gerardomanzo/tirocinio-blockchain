@@ -5,7 +5,7 @@
  */
 function confermaRegistrazioneUtente(tx) {
 	var utente = tx.utente;
-	
+
 	utente.statoRegistrazione = true;
 
 	// Get the participant registry for the participant.
