@@ -20,6 +20,10 @@
         <servlet-name>CreaCriterioServlet</servlet-name>
         <servlet-class>servlet.CreaCriterioServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegistrazioneOggettoServlet</servlet-name>
+        <servlet-class>servlet.RegistrazioneOggettoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegistrazioneServlet</servlet-name>
         <url-pattern>/RegistrazioneUtente</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>CreaCriterioServlet</servlet-name>
         <url-pattern>/CreaCriterio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrazioneOggettoServlet</servlet-name>
+        <url-pattern>/RegistrazioneOggetto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
