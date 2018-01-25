@@ -30,25 +30,22 @@ public class UtenteEJB {
 
     public Utente creaUtente(Utente utente) {
 
-        String body;
-        Utente[] result;
-
-        Response responseEmail = CLIENT.target(URI_QUERY + "/findByEmail")
+        Response response = CLIENT.target(URI_QUERY + "/findByEmail")
                 .queryParam("param", utente.getEmail())
                 .request()
                 .get();
 
-        body = responseEmail.readEntity(String.class);
+        String body = response.readEntity(String.class);
 
-        result = gson.fromJson(body, Utente[].class);
+        Utente[] result = gson.fromJson(body, Utente[].class);
 
         if (result.length == 0) {
-            Response responseNomeUtente = CLIENT.target(URI_QUERY + "/findByUsername")
+            response = CLIENT.target(URI_QUERY + "/findByUsername")
                     .queryParam("param", utente.getNomeUtente())
                     .request()
                     .get();
 
-            body = responseNomeUtente.readEntity(String.class);
+            body = response.readEntity(String.class);
 
             result = gson.fromJson(body, Utente[].class);
 
@@ -57,7 +54,7 @@ public class UtenteEJB {
 
                 String json = gson.toJson(utente);
 
-                Response response = CLIENT.target(URI_BASE + "/Utente")
+                response = CLIENT.target(URI_BASE + "/Utente")
                         .request()
                         .post(Entity.entity(json, MediaType.APPLICATION_JSON));
                 return utente;

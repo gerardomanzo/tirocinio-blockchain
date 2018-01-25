@@ -28,24 +28,21 @@ public class CriterioEJB {
 
     public Criterio creaCriterio(Criterio criterio) {
 
-        String body;
-        Criterio[] result;
-
-        Response responseNomeUtente = CLIENT.target(URI_QUERY + "/findByNomeCriterio")
+        Response response = CLIENT.target(URI_QUERY + "/findByNomeCriterio")
                 .queryParam("param", criterio.getNomeCriterio())
                 .request()
                 .get();
 
-        body = responseNomeUtente.readEntity(String.class);
+        String body = response.readEntity(String.class);
 
-        result = gson.fromJson(body, Criterio[].class);
+        Criterio[] result = gson.fromJson(body, Criterio[].class);
 
         if (result.length == 0) {
             criterio.setIdCriterio(idGen.nextId());
 
             String json = gson.toJson(criterio);
 
-            Response response = CLIENT.target(URI_BASE + "/Criterio")
+            response = CLIENT.target(URI_BASE + "/Criterio")
                     .request()
                     .post(Entity.entity(json, MediaType.APPLICATION_JSON));
             return criterio;
