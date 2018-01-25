@@ -32,3 +32,10 @@ query findByNomeCriterio{
       SELECT it.unisa.Criterio
       WHERE (nomeCriterio == _$param)
 }
+
+query findByNomeOggetto{
+  description: "Seleziona l'oggetto con nomeOggetto = PARAM"
+  statement:
+      SELECT it.unisa.Oggetto
+      WHERE (nomeOggetto == _$param)
+}
