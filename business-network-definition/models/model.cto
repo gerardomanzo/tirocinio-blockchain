@@ -14,6 +14,14 @@ asset Criterio identified by idCriterio {
 	o Integer maxPunteggio default = 10
 }
 
+asset Oggetto identified by idOggetto {
+	o String idOggetto
+	o String nomeOggetto
+	o String descrizione
+	o Boolean statoRegistrazione default = false
+	--> Utente proprietario
+}
+
 transaction ConfermaRegistrazioneUtente {
 	--> Utente utente
 }
