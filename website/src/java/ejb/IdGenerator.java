@@ -1,6 +1,7 @@
 package ejb;
 
 import bean.Criterio;
+import bean.Oggetto;
 import bean.Utente;
 import com.google.gson.Gson;
 import java.net.URI;
@@ -19,7 +20,7 @@ public class IdGenerator {
     private final static Client CLIENT = ClientBuilder.newClient();
 
     private final SecureRandom rndGen;
-    private TreeSet<String> keys;
+    private final TreeSet<String> keys;
 
     private final Gson gson = new Gson();
 
@@ -39,8 +40,8 @@ public class IdGenerator {
         body = response.readEntity(String.class);
         result = gson.fromJson(body, Utente[].class);
 
-        for (int i = 0; i < result.length; i++) {
-            keys.add(((Utente) result[i]).getIdUtente());
+        for (Object item : result) {
+            keys.add(((Utente) item).getIdUtente());
         }
 
         response = CLIENT.target(URI_BASE + "/Criterio")
@@ -50,8 +51,19 @@ public class IdGenerator {
         body = response.readEntity(String.class);
         result = gson.fromJson(body, Criterio[].class);
 
-        for (int i = 0; i < result.length; i++) {
-            keys.add(((Criterio) result[i]).getIdCriterio());
+        for (Object item : result) {
+            keys.add(((Criterio) item).getIdCriterio());
+        }
+        
+        response = CLIENT.target(URI_BASE + "/Oggetto")
+                .request()
+                .get();
+
+        body = response.readEntity(String.class);
+        result = gson.fromJson(body, Oggetto[].class);
+
+        for (Object item : result) {
+            keys.add(((Oggetto) item).getIdOggetto());
         }
     }
 
@@ -59,12 +71,11 @@ public class IdGenerator {
 
         String id;
         do {
-            id = Integer.toString(Math.abs(rndGen.nextInt()) % 5, 16);
-            System.out.println("id = " + id);
+            id = Integer.toString(Math.abs(rndGen.nextInt()), 16);
         } while (keys.contains(id));
 
         keys.add(id);
-        
+
         return id;
     }
 }
