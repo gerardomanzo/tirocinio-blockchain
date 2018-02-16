@@ -1,10 +1,12 @@
+<%@page import="bean.Criterio"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Crea criterio</title>
+        <title>Associa criterio a evento</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -16,6 +18,7 @@
         <link rel="stylesheet" type="text/css" href="./css/style.css">
     </head>
     <body>
+
         <!-- Page -->
         <div id="page-content-wrapper">
 
@@ -29,11 +32,13 @@
                     %>
                     <a href="Logout" style="color: white"> <i class="fa fa-power-off fa-3x float-xs-right"></i> </a>
 
-
                     <% }  %>
 
                 </nav>
             </header>
+            <!-- /Header -->
+
+            <!-- Main -->
 
             <!-- Main -->
             <%
@@ -42,26 +47,52 @@
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto amministratore!</h1>
-                    <h2 class="text-center">Creazione criterio</h2>
+                    <h2 class="text-center">Associa Criterio a Evento</h2>
+                    <div class="col-md-8 offset-md-2">
+                        <form action="ConfermaCriterio" method="POST">
+                            <table class="table table-bordered">
+                                <thead class="thead-blue">
+                                    <tr >
+                                        <th>ID</th>
+                                        <th>Nome criterio</th>
+                                        <th>Max Punteggio</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        List<Criterio> lista = (List<Criterio>) session.getAttribute("criteri");
+                                        if (lista != null && lista.size() > 0) {
+                                            for (Criterio c : lista) {
+                                    %>
+                                    <tr>
+                                        <td><%=c.getIdCriterio()%></td>
+                                        <td><%=c.getNomeCriterio()%></td>
+                                        <td><%=c.getMaxPunteggio()%></td>
+                                        <td>
+                                            <input type="radio" name="idCriterio" value="<%=c.getIdCriterio()%>">
+                                        </td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>
 
-                    <div class="form">
-                        <form method="POST" action="CreaCriterio">
-                            <div class="form-group row">
-                                <label for="nomeCriterio" class="col-sm-4 col-form-label">Nome criterio</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="nomeCriterio" id="nomeCriterio" placeholder="Nome criterio">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="maxPunteggio" class="col-sm-4 col-form-label">Max punteggio (default = 10)</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="maxPunteggio" id="punteggio" value="10" placeholder="Max punteggio">
-                                </div>
-                            </div>
+                                    <%
+                                    } else {
+                                    %>
+                                    <tr>
+                                        <td colspan="4">Tutti i criteri sono già associati o nessun criterio registrato!</td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>    
+                                </tbody>
 
-                            <button>Crea!</button>
+                            </table>
+
+                            <input type="submit" value="Conferma">
                         </form>
-                        
+
                         <a href="dashboardAdmin.jsp">Torna alla dashboard</a>
                     </div>
                 </div>

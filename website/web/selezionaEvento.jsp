@@ -1,4 +1,5 @@
 <%@page import="bean.Utente"%>
+<%@page import="bean.Evento"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -6,7 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Conferma registrazione utente</title>
+        <title>Registra Oggetto ad un evento</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -44,28 +45,56 @@
             %>
             <section>
                 <div class="container-fluid">
-                    <h1 class="text-center">Benvenuto <%=utente.getNomeUtente()%>!</h1>
+                    <h1 class="text-center">Benvenuto  <%=utente.getNomeUtente()%>!</h1>
+                    <h2 class="text-center">Registra oggetto a un evento</h2>
+                    <div class="col-md-8 offset-md-2">
+                        <form action="PartecipazioneServlet" method="POST">
+                            <input type="hidden" name="action" value="visualizzaOggetti">
+                            <table class="table table-bordered">
+                                <thead class="thead-blue">
+                                    <tr >
+                                        <th>ID</th>
+                                        <th>Nome evento</th>
+                                        <th>Data inizio evento</th>
+                                        <th>Data fine evento</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        List<Evento> lista = (List<Evento>) session.getAttribute("eventi");
+                                        if (lista != null && lista.size() > 0) {
+                                            for (Evento e : lista) {
+                                    %>
+                                    <tr>
+                                        <td><%=e.getIdEvento()%></td>
+                                        <td><%=e.getNomeEvento()%></td>
+                                        <td><%=e.getDataInizio().substring(0, 10)%></td>
+                                        <td><%=e.getDataFine().substring(0, 10)%></td>
+                                        <td>
+                                            <input type="radio" name="idEvento" value="<%=e.getIdEvento()%>">
+                                        </td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>
 
-                    <h2 class="text-center">Registrazione Oggetto</h2>
+                                    <%
+                                    } else {
+                                    %>
+                                    <tr>
+                                        <td colspan="5">Nessun evento registrato!</td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>    
+                                </tbody>
 
-                    <div class="form">
-                        <form method="POST" action="RegistrazioneOggetto">
-                            <div class="form-group row">
-                                <label for="nomeOggetto" class="col-sm-4 col-form-label">Nome oggetto</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="nomeOggetto" id="nomeOggetto" placeholder="Nome oggetto">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="descrizioneOggetto" class="col-sm-4 col-form-label">Descrizione</label>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control" name="descrizioneOggetto" id="descrizioneOggetto" rows="5" maxlength="100" style="resize: none;"></textarea>
-                                </div>
-                            </div>
+                            </table>
 
-                            <button>Registra!</button>
+                            <input type="submit" value="Avanti">
                         </form>
-                        
+        
                         <a href="dashboardUtente.jsp">Torna alla dashboard</a>
                     </div>
                 </div>

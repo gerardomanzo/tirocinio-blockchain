@@ -1,10 +1,12 @@
+<%@page import="bean.Evento"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Crea criterio</title>
+        <title>Associa criterio a evento</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -16,6 +18,7 @@
         <link rel="stylesheet" type="text/css" href="./css/style.css">
     </head>
     <body>
+
         <!-- Page -->
         <div id="page-content-wrapper">
 
@@ -34,34 +37,65 @@
 
                 </nav>
             </header>
+            <!-- /Header -->
 
             <!-- Main -->
+            <!-- Main -->
             <%
+
                 if (login != null && login.booleanValue()) {
             %>
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto amministratore!</h1>
-                    <h2 class="text-center">Creazione criterio</h2>
+                    <h2 class="text-center">Associa Criterio a Evento</h2>
+                    <div class="col-md-8 offset-md-2">
+                        <form action="AssociaCriterio" method="POST">
+                            <table class="table table-bordered">
+                                <thead class="thead-blue">
+                                    <tr >
+                                        <th>ID</th>
+                                        <th>Nome evento</th>
+                                        <th>Data inizio evento</th>
+                                        <th>Data fine evento</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        List<Evento> lista = (List<Evento>) session.getAttribute("eventi");
+                                        if (lista != null && lista.size() > 0) {
+                                            for (Evento e : lista) {
+                                    %>
+                                    <tr>
+                                        <td><%=e.getIdEvento()%></td>
+                                        <td><%=e.getNomeEvento()%></td>
+                                        <td><%=e.getDataInizio().substring(0, 10)%></td>
+                                        <td><%=e.getDataFine().substring(0, 10)%></td>
+                                        <td>
+                                            <input type="radio" name="idEvento" value="<%=e.getIdEvento()%>">
+                                        </td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>
 
-                    <div class="form">
-                        <form method="POST" action="CreaCriterio">
-                            <div class="form-group row">
-                                <label for="nomeCriterio" class="col-sm-4 col-form-label">Nome criterio</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="nomeCriterio" id="nomeCriterio" placeholder="Nome criterio">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="maxPunteggio" class="col-sm-4 col-form-label">Max punteggio (default = 10)</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="maxPunteggio" id="punteggio" value="10" placeholder="Max punteggio">
-                                </div>
-                            </div>
+                                    <%
+                                    } else {
+                                    %>
+                                    <tr>
+                                        <td colspan="5">Nessun evento registrato!</td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>    
+                                </tbody>
 
-                            <button>Crea!</button>
+                            </table>
+
+                            <input type="submit" value="Avanti">
                         </form>
-                        
+
                         <a href="dashboardAdmin.jsp">Torna alla dashboard</a>
                     </div>
                 </div>

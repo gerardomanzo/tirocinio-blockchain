@@ -1,10 +1,13 @@
+<%@page import="bean.Partecipazione"%>
+<%@page import="bean.Utente"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Crea criterio</title>
+        <title>Conferma registrazione utente</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -16,6 +19,7 @@
         <link rel="stylesheet" type="text/css" href="./css/style.css">
     </head>
     <body>
+
         <!-- Page -->
         <div id="page-content-wrapper">
 
@@ -29,12 +33,13 @@
                     %>
                     <a href="Logout" style="color: white"> <i class="fa fa-power-off fa-3x float-xs-right"></i> </a>
 
-
                     <% }  %>
 
                 </nav>
             </header>
+            <!-- /Header -->
 
+            <!-- Main -->
             <!-- Main -->
             <%
                 if (login != null && login.booleanValue()) {
@@ -42,26 +47,47 @@
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto amministratore!</h1>
-                    <h2 class="text-center">Creazione criterio</h2>
+                    <h2 class="text-center">Conferma Partecipazione</h2>
+                    <div class="col-md-8 offset-md-2">
+                        <table class="table table-bordered">
+                            <thead class="thead-blue">
+                                <tr>
+                                    <th>ID Partecipazione</th>
+                                    <th>ID Evento</th>
+                                    <th>ID Oggetto</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    List<Partecipazione> lista = (List<Partecipazione>) session.getAttribute("partecipazioneNonRegistrati");
+                                    if (lista != null && lista.size() > 0) {
+                                        for (Partecipazione u : lista) {
+                                %>
+                                <tr>
+                                    <td><%=u.getIdPartecipazione()%></td>
+                                    <td><%=u.getIdEvento()%></td>
+                                    <td><%=u.getIdOggetto()%></td>
+                                    <td>
+                                        <form action="ConfermaPartecipazione" method="POST">
+                                            <input type="hidden" name="idPartecipazione" value="<%=u.getIdPartecipazione()%>">
+                                            <input type="submit" value="Conferma">
+                                        </form>
+                                    </td>
+                                </tr>
+                                <%
+                                    }
+                                } else {
+                                %>
+                                <tr>
+                                    <td colspan="4">Nessuna partecipazione in attesa di conferma!</td>
+                                </tr>
+                                <%
+                                    }
+                                %>
+                            </tbody>
+                        </table>
 
-                    <div class="form">
-                        <form method="POST" action="CreaCriterio">
-                            <div class="form-group row">
-                                <label for="nomeCriterio" class="col-sm-4 col-form-label">Nome criterio</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="nomeCriterio" id="nomeCriterio" placeholder="Nome criterio">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="maxPunteggio" class="col-sm-4 col-form-label">Max punteggio (default = 10)</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="maxPunteggio" id="punteggio" value="10" placeholder="Max punteggio">
-                                </div>
-                            </div>
-
-                            <button>Crea!</button>
-                        </form>
-                        
                         <a href="dashboardAdmin.jsp">Torna alla dashboard</a>
                     </div>
                 </div>
@@ -104,6 +130,7 @@
     <script src="./js/jquery.js"></script>
     <script src="./js/popper.js"></script>
     <script src="./js/bootstrap.js"></script>
+    <script src="./js/offcanvas.js"></script>
 
 </body>
 </html>

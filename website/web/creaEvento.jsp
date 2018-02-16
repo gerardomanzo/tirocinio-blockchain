@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Crea criterio</title>
+        <title>Crea evento</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -30,10 +30,13 @@
                     <a href="Logout" style="color: white"> <i class="fa fa-power-off fa-3x float-xs-right"></i> </a>
 
 
+
                     <% }  %>
 
                 </nav>
             </header>
+            <!-- /Header -->
+
 
             <!-- Main -->
             <%
@@ -42,23 +45,34 @@
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto amministratore!</h1>
-                    <h2 class="text-center">Creazione criterio</h2>
+                    <h2 class="text-center">Creazione Evento</h2>
 
                     <div class="form">
-                        <form method="POST" action="CreaCriterio">
+                        <form method="POST" action="CreaEvento">
                             <div class="form-group row">
-                                <label for="nomeCriterio" class="col-sm-4 col-form-label">Nome criterio</label>
+                                <label for="nomeEvento" class="col-sm-4 col-form-label">Nome Evento</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="nomeCriterio" id="nomeCriterio" placeholder="Nome criterio">
+                                    <input type="text" class="form-control" name="nomeEvento" id="nomeEvento" placeholder="Nome Evento">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="maxPunteggio" class="col-sm-4 col-form-label">Max punteggio (default = 10)</label>
+                                <label for="descrizione" class="col-sm-4 col-form-label">Descrizione</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="maxPunteggio" id="punteggio" value="10" placeholder="Max punteggio">
+                                    <textarea class="form-control" name="descrizione" id="descrizione" rows="5" maxlength="100" style="resize: none;"></textarea>
                                 </div>
                             </div>
-
+                            <div class="form-group row">
+                                <label for="dataInizio" class="col-sm-4 col-form-label">Inizio Evento</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="dataInizio" id="dataInizio" placeholder="Inizio Evento">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="dataFine" class="col-sm-4 col-form-label">Fine Evento</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="dataFine" id="dataFine" placeholder="Fine Evento">
+                                </div>
+                            </div>
                             <button>Crea!</button>
                         </form>
                         
