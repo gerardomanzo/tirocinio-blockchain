@@ -26,6 +26,14 @@ query findNotRegistered{
       WHERE (statoRegistrazione == false)
 }
 
+query findObjectNotRegistred{
+  description: "Seleziona gli oggetti la cui registrazione non è stata confemata"
+  statement:
+  SELECT it.unisa.Oggetto
+  WHERE  (statoRegistrazione == false)
+}
+
+
 query findByNomeCriterio{
   description: "Seleziona il criterio con nomeCriterio = PARAM"
   statement:
@@ -38,4 +46,18 @@ query findByNomeOggetto{
   statement:
       SELECT it.unisa.Oggetto
       WHERE (nomeOggetto == _$param)
+}
+
+query findByNomeEvento{
+  description: "Seleziona l'oggetto con nomeEvento = PARAM"
+  statement:
+      SELECT it.unisa.Evento
+      WHERE (nomeEvento == _$param)
+}
+
+query findNotRegistredPartecipation{
+  description: "Seleziona le partecipazioni la cui registrazione non è stata confemata"
+  statement:
+  	SELECT it.unisa.Partecipazione
+  	WHERE  (statoRegistrazione == false)
 }
