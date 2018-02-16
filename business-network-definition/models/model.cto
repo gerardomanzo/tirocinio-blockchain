@@ -22,6 +22,35 @@ asset Oggetto identified by idOggetto {
 	--> Utente proprietario
 }
 
+asset Evento identified by idEvento {
+    o String idEvento
+    o String nomeEvento
+    o String descrizione
+    o DateTime dataInizio
+    o DateTime dataFine
+    --> Criterio[] criteri optional
+}
+  
+asset Partecipazione identified by idPartecipazione{
+	o String idPartecipazione
+ 	o String idEvento
+  	o String idOggetto
+  	o Boolean statoRegistrazione default = false
+}
+
 transaction ConfermaRegistrazioneUtente {
-	--> Utente utente
+    --> Utente utente
+}
+
+transaction ConfermaRegistrazioneOggetto {
+    --> Oggetto oggetto
+}
+
+transaction ConfermaRegistrazionePartecipazione{
+  -->Partecipazione partecipazione
+}
+
+transaction AggiungiCriterio {
+    --> Evento evento
+    --> Criterio criterio
 }
