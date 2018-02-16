@@ -13,8 +13,12 @@
         <servlet-class>servlet.LoginAdminServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ConfermaUtente</servlet-name>
-        <servlet-class>servlet.ConfermaUtente</servlet-class>
+        <servlet-name>ConfermaUtenteServlet</servlet-name>
+        <servlet-class>servlet.ConfermaUtenteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfermaOggettoServlet</servlet-name>
+        <servlet-class>servlet.ConfermaOggettoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CreaCriterioServlet</servlet-name>
@@ -23,6 +27,34 @@
     <servlet>
         <servlet-name>RegistrazioneOggettoServlet</servlet-name>
         <servlet-class>servlet.RegistrazioneOggettoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreaEventoServlet</servlet-name>
+        <servlet-class>servlet.CreaEventoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AssociaCriterioServlet</servlet-name>
+        <servlet-class>servlet.AssociaCriterioServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfermaCriterioServlet</servlet-name>
+        <servlet-class>servlet.ConfermaCriterioServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PartecipazioneServlet</servlet-name>
+        <servlet-class>servlet.PartecipazioneServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreaPartecipazioneServelet</servlet-name>
+        <servlet-class>servlet.CreaPartecipazioneServelet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfermaPartecipazioneServlet</servlet-name>
+        <servlet-class>servlet.ConfermaPartecipazioneServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegistrazioneServlet</servlet-name>
@@ -37,8 +69,12 @@
         <url-pattern>/LoginAdmin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ConfermaUtente</servlet-name>
+        <servlet-name>ConfermaUtenteServlet</servlet-name>
         <url-pattern>/ConfermaUtente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfermaOggettoServlet</servlet-name>
+        <url-pattern>/ConfermaOggetto</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CreaCriterioServlet</servlet-name>
@@ -47,6 +83,34 @@
     <servlet-mapping>
         <servlet-name>RegistrazioneOggettoServlet</servlet-name>
         <url-pattern>/RegistrazioneOggetto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreaEventoServlet</servlet-name>
+        <url-pattern>/CreaEvento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AssociaCriterioServlet</servlet-name>
+        <url-pattern>/AssociaCriterio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfermaCriterioServlet</servlet-name>
+        <url-pattern>/ConfermaCriterio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PartecipazioneServlet</servlet-name>
+        <url-pattern>/PartecipazioneServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreaPartecipazioneServelet</servlet-name>
+        <url-pattern>/CreaPartecipazione</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfermaPartecipazioneServlet</servlet-name>
+        <url-pattern>/ConfermaPartecipazione</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

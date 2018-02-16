@@ -1,7 +1,9 @@
 package ejb;
 
 import bean.Criterio;
+import bean.Evento;
 import bean.Oggetto;
+import bean.Partecipazione;
 import bean.Utente;
 import com.google.gson.Gson;
 import java.net.URI;
@@ -54,7 +56,7 @@ public class IdGenerator {
         for (Object item : result) {
             keys.add(((Criterio) item).getIdCriterio());
         }
-        
+
         response = CLIENT.target(URI_BASE + "/Oggetto")
                 .request()
                 .get();
@@ -64,6 +66,28 @@ public class IdGenerator {
 
         for (Object item : result) {
             keys.add(((Oggetto) item).getIdOggetto());
+        }
+
+        response = CLIENT.target(URI_BASE + "/Evento")
+                .request()
+                .get();
+
+        body = response.readEntity(String.class);
+        result = gson.fromJson(body, Evento[].class);
+
+        for (Object item : result) {
+            keys.add(((Evento) item).getIdEvento());
+        }
+        
+        response = CLIENT.target(URI_BASE + "/Partecipazione")
+                .request()
+                .get();
+
+        body = response.readEntity(String.class);
+        result = gson.fromJson(body, Partecipazione[].class);
+
+        for (Object item : result) {
+            keys.add(((Partecipazione) item).getIdEvento());
         }
     }
 
