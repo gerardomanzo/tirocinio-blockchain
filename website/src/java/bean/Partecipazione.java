@@ -5,7 +5,7 @@ public class Partecipazione {
     private String idPartecipazione;
     private String idEvento;
     private String idOggetto;
-    private boolean statoRegistrazione;
+    private Boolean statoRegistrazione;
 
     public Partecipazione(String idEvento, String idOggetto) {
         this.idEvento = idEvento;

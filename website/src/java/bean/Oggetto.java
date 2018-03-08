@@ -2,7 +2,6 @@ package bean;
 
 public class Oggetto {
 
-    private final String $class = "it.unisa.Oggetto";
     private String idOggetto;
     private String nomeOggetto;
     private String descrizione;

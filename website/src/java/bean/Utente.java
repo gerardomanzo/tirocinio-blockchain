@@ -2,7 +2,6 @@ package bean;
 
 public class Utente {
 
-    private final String $class = "it.unisa.Utente";
     private String idUtente;
     private String nomeUtente;
     private String email;

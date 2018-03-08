@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Evento {
 
-    private final String $class = "it.unisa.Evento";
     private String idEvento;
     private String nomeEvento;
     private String descrizione;

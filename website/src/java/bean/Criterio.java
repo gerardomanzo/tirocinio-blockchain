@@ -2,7 +2,6 @@ package bean;
 
 public class Criterio {
 
-    private final String $class = "it.unisa.Criterio";
     private String idCriterio;
     private String nomeCriterio;
     private Integer maxPunteggio;
