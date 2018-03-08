@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Associa criterio a evento</title>
+        <title>Associa criterio a votazione</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -48,16 +48,16 @@
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto amministratore!</h1>
-                    <h2 class="text-center">Associa Criterio a Evento</h2>
+                    <h2 class="text-center">Associa Criterio a Votazione</h2>
                     <div class="col-md-8 offset-md-2">
                         <form action="AssociaCriterio" method="POST">
                             <table class="table table-bordered">
                                 <thead class="thead-blue">
                                     <tr >
                                         <th>ID</th>
-                                        <th>Nome evento</th>
-                                        <th>Data inizio evento</th>
-                                        <th>Data fine evento</th>
+                                        <th>Nome votazione</th>
+                                        <th>Data inizio votazione</th>
+                                        <th>Data fine votazione</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -84,7 +84,7 @@
                                     } else {
                                     %>
                                     <tr>
-                                        <td colspan="5">Nessun evento registrato!</td>
+                                        <td colspan="5">Nessuna votazione registrata!</td>
                                     </tr>
                                     <%
                                         }

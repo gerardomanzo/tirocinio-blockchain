@@ -71,6 +71,7 @@ public class PartecipazioneServlet extends HttpServlet {
                 dispatcher.forward(request, response);
 
             } else if (action.equalsIgnoreCase("InserisciPartecipazione")) {
+                System.out.println("InserisciPartecipazione");
                 idEvento = (String) session.getAttribute("idEvento");
 
                 String idOggetto = request.getParameter("idOggetto");
@@ -88,6 +89,7 @@ public class PartecipazioneServlet extends HttpServlet {
             }
 
         } else {
+            System.out.println("ELSE");
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboardUtente.jsp");
             dispatcher.forward(request, response);
         }

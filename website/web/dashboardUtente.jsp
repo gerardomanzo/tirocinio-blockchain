@@ -52,28 +52,41 @@
                         <div class="card-deck">
                             <div class="card">
                                 <div class="card-header bg-blue">
-                                    <a href="registrazioneOggetto.jsp" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Registra nuovo Oggetto</a>
+                                    <a href="registrazioneOggetto.jsp" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Registra nuova Candidatura</a>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text">Registra il tuo Oggetto.</p>
+                                    <p class="card-text">Registra la tua Candidatura.</p>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-header bg-blue">
-                                    <a href="PartecipazioneServlet" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Registra Oggetto ad un Evento</a>
+                                    <a href="PartecipazioneServlet" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Registra Candidatura ad una Votazione</a>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text">Per partecipare ad un Evento devi prima iscrivere un tuo Oggetto.</p>
+                                    <p class="card-text">Per partecipare ad una Votazione devi prima iscrivere una tua Candidatura.</p>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-header bg-blue">
-                                    <a href="" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Vota!</a>
+                                    <a href="Voto" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Vota!</a>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text">Vota gli Oggetti degli altri Utenti.</p>
+                                    <p class="card-text">Vota le Candidature iscritte alle Votazioni.</p>
                                 </div>
                             </div>
+                        </div>
+                        <div class="card-deck" style="margin-top: 1rem">
+                            <div class="card">
+                                <div class="card-header bg-blue">
+                                    <a href="RisultatiServlet" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Risultati!</a>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Visualizza i risultati di una Votazione!</p>
+                                </div>
+                            </div>
+                            <div class="card" style="border: 0"></div>
+                            <div class="card" style="border: 0"></div>
+
                         </div>
 
                     </div>

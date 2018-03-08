@@ -8,7 +8,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Registra Oggetto ad un evento</title>
+        <title>Registra candidatura a votazione</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -46,7 +46,7 @@
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto  <%=utente.getNomeUtente()%>!</h1>
-                    <h2 class="text-center">Registra l'oggetto a un evento</h2>
+                    <h2 class="text-center">Registra una candidatura a una votazione</h2>
                     <div class="col-md-8 offset-md-2">
                         <form action="PartecipazioneServlet" method="POST">
                             <input type="hidden" name="action" value="InserisciPartecipazione">
@@ -54,7 +54,7 @@
                                 <thead class="thead-blue">
                                     <tr >
                                         <th>ID</th>
-                                        <th>Nome Oggetto</th>
+                                        <th>Nome Candidatura</th>
                                         <th>Descrizione</th>
                                         <th></th>
                                     </tr>
@@ -81,7 +81,7 @@
                                     } else {
                                     %>
                                     <tr>
-                                        <td colspan="5">Nessun Oggetto registrato!</td>
+                                        <td colspan="5">Nessuna candidatura registrata!</td>
                                     </tr>
                                     <%
                                         }

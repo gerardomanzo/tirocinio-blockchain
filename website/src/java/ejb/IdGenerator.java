@@ -5,6 +5,7 @@ import bean.Evento;
 import bean.Oggetto;
 import bean.Partecipazione;
 import bean.Utente;
+import bean.Voto;
 import com.google.gson.Gson;
 import java.net.URI;
 import java.security.SecureRandom;
@@ -78,7 +79,7 @@ public class IdGenerator {
         for (Object item : result) {
             keys.add(((Evento) item).getIdEvento());
         }
-        
+
         response = CLIENT.target(URI_BASE + "/Partecipazione")
                 .request()
                 .get();
@@ -89,6 +90,17 @@ public class IdGenerator {
         for (Object item : result) {
             keys.add(((Partecipazione) item).getIdEvento());
         }
+
+        response = CLIENT.target(URI_BASE + "/Voto")
+                .request()
+                .get();
+
+        body = response.readEntity(String.class);
+        result = gson.fromJson(body, Voto[].class);
+
+        for (Object item : result) {
+            keys.add(((Voto) item).getIdVoto());
+        }
     }
 
     public String nextId() {
@@ -98,6 +110,13 @@ public class IdGenerator {
             id = Integer.toString(Math.abs(rndGen.nextInt()), 16);
         } while (keys.contains(id));
 
+        if (id.length() < 8) {
+            int n = id.length();
+
+            for (int i = 0; i < 8 - n; i++) {
+                id = "0" + id;
+            }
+        }
         keys.add(id);
 
         return id;

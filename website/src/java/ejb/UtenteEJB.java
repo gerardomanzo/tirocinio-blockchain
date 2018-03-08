@@ -95,13 +95,22 @@ public class UtenteEJB {
     }
 
     public void confermaUtente(String idUtente) {
-
         String json = "{\"utente\": \"resource:it.unisa.Utente#" + idUtente + "\"}";
-
-        System.out.println(json);
 
         Response response = CLIENT.target(URI_BASE + "/ConfermaRegistrazioneUtente")
                 .request()
                 .post(Entity.entity(json, MediaType.APPLICATION_JSON));
     }
+
+    public List<Utente> cercaTuttiGliUtenti() {
+        Response response = CLIENT.target(URI_BASE + "/Utente")
+                .request()
+                .get();
+
+        String body = response.readEntity(String.class);
+        Utente[] result = gson.fromJson(body, Utente[].class);
+
+        return Arrays.asList(result);
+    }
+
 }

@@ -53,8 +53,8 @@
                             <thead class="thead-blue">
                                 <tr>
                                     <th>ID Partecipazione</th>
-                                    <th>ID Evento</th>
-                                    <th>ID Oggetto</th>
+                                    <th>ID Votazione</th>
+                                    <th>ID Candidatura</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -66,8 +66,8 @@
                                 %>
                                 <tr>
                                     <td><%=u.getIdPartecipazione()%></td>
-                                    <td><%=u.getIdEvento()%></td>
-                                    <td><%=u.getIdOggetto()%></td>
+                                    <td><%=u.getIdEvento().substring(25, 33)%></td>
+                                    <td><%=u.getIdOggetto().substring(26, 34)%></td>
                                     <td>
                                         <form action="ConfermaPartecipazione" method="POST">
                                             <input type="hidden" name="idPartecipazione" value="<%=u.getIdPartecipazione()%>">

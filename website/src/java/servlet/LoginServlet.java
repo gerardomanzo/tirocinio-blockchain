@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.removeAttribute("utente");
             session.setAttribute("utente", utente);
-            
+
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboardUtente.jsp");
             dispatcher.forward(request, response);
         } else {

@@ -119,4 +119,37 @@ public class EventoEJB {
                 .post(Entity.entity(json, MediaType.APPLICATION_JSON));
     }
 
+    public List<Criterio> cercaCriteriEvento(String idEvento) {
+        Response response = CLIENT.target(URI_BASE + "/Evento/" + idEvento)
+                .request()
+                .get();
+
+        String body = response.readEntity(String.class);
+
+        Evento evento = gson.fromJson(body, Evento.class);
+
+        List<String> lista = evento.getCriteri();
+
+        List<Criterio> listaCriterio = new ArrayList<>();
+
+        Criterio criterio;
+
+        for (String idCriterio : lista) {
+
+            idCriterio = idCriterio.substring(27, 35);
+
+            response = CLIENT.target(URI_BASE + "/Criterio/" + idCriterio)
+                    .request()
+                    .get();
+
+            body = response.readEntity(String.class);
+
+            criterio = gson.fromJson(body, Criterio.class);
+
+            listaCriterio.add(criterio);
+        }
+
+        return listaCriterio;
+    }
+
 }

@@ -7,7 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Registra candidatura a votazione</title>
+        <title>Visualizza i Risultati</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -46,10 +46,10 @@
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto  <%=utente.getNomeUtente()%>!</h1>
-                    <h2 class="text-center">Registra una candidatura a una votazione</h2>
+                    <h2 class="text-center">Seleziona la votazione che vuoi visualizzare</h2>
                     <div class="col-md-8 offset-md-2">
-                        <form action="PartecipazioneServlet" method="POST">
-                            <input type="hidden" name="action" value="visualizzaOggetti">
+                        <form action="RisultatiServlet" method="POST">
+                            <input type="hidden" name="action" value="visualizzaEventi">
                             <table class="table table-bordered">
                                 <thead class="thead-blue">
                                     <tr >

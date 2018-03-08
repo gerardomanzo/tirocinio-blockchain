@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Conferma registrazione utente</title>
+        <title>Registrazione candidatura</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -46,14 +46,14 @@
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto <%=utente.getNomeUtente()%>!</h1>
 
-                    <h2 class="text-center">Registrazione Oggetto</h2>
+                    <h2 class="text-center">Registrazione Candidatura</h2>
 
                     <div class="form">
                         <form method="POST" action="RegistrazioneOggetto">
                             <div class="form-group row">
-                                <label for="nomeOggetto" class="col-sm-4 col-form-label">Nome oggetto</label>
+                                <label for="nomeOggetto" class="col-sm-4 col-form-label">Nome Candidatura</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="nomeOggetto" id="nomeOggetto" placeholder="Nome oggetto">
+                                    <input type="text" class="form-control" name="nomeOggetto" id="nomeOggetto" placeholder="Nome Candidatura">
                                 </div>
                             </div>
                             <div class="form-group row">

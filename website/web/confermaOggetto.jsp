@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Conferma registrazione oggetto</title>
+        <title>Conferma registrazione candidatura</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -48,13 +48,13 @@
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto amministratore!</h1>
-                    <h2 class="text-center">Conferma registrazione Oggetto</h2>
+                    <h2 class="text-center">Conferma registrazione Candidatura</h2>
                     <div class="col-md-8 offset-md-2">
                         <table class="table table-bordered">
                             <thead class="thead-blue">
                                 <tr >
                                     <th>ID</th>
-                                    <th>Nome oggetto</th>
+                                    <th>Nome candidatura</th>
                                     <th>Descrizione</th>
                                     <th></th>
                                 </tr>
@@ -81,7 +81,7 @@
                                 } else {
                                 %>
                                 <tr>
-                                    <td colspan="4">Nessun oggetto in attesa di conferma!</td>
+                                    <td colspan="4">Nessuna candidatura in attesa di conferma!</td>
                                 </tr>
                                 <%
                                     }

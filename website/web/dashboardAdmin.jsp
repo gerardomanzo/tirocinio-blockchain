@@ -48,15 +48,15 @@
                         <div class="card-deck">
                             <div class="card">
                                 <div class="card-header bg-blue">
-                                    <a href="creaEvento.jsp" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Crea nuovo Evento</a>
+                                    <a href="creaEvento.jsp" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Crea nuova Votazione</a>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text">Crea un nuovo Evento.</p>
+                                    <p class="card-text">Crea una nuova Votazione.</p>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-header bg-blue">
-                                    <a href="creaCriterio.jsp" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Crea nuovo Criterio</a>
+                                    <a href="creaCriterio.jsp" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Crea nuovo Criterio</a>
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text">Crea un nuovo Criterio di valutazione.</p>
@@ -64,17 +64,17 @@
                             </div>
                             <div class="card">
                                 <div class="card-header bg-blue">
-                                    <a href="AssociaCriterio" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Associa Criterio a Evento</a>
+                                    <a href="AssociaCriterio" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Associa Criterio a Votazione</a>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text">Associa un Criterio di valutazione ad un Evento.</p>
+                                    <p class="card-text">Associa un Criterio di valutazione ad una Votazione.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="card-deck" style="margin-top: 1rem;">
                             <div class="card">
                                 <div class="card-header bg-blue">
-                                    <a href="ConfermaUtente" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Conferma registrazione Utente</a>
+                                    <a href="ConfermaUtente" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Conferma registrazione Utente</a>
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text">Conferma la registrazione di un Utente.</p>
@@ -82,18 +82,18 @@
                             </div>
                             <div class="card">
                                 <div class="card-header bg-blue">
-                                    <a href="ConfermaOggetto" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Conferma registrazione Oggetto</a>
+                                    <a href="ConfermaOggetto" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Conferma registrazione Candidatura</a>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text">Conferma la registrazione di un Oggetto.</p>
+                                    <p class="card-text">Conferma la registrazione di una Candidatura.</p>
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="card-header bg-blue">
-                                    <a href="ConfermaPartecipazione" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Conferma partecipazione a Evento</a>
+                                    <a href="ConfermaPartecipazione" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Conferma partecipazione a Votazione</a>
                                 </div>
                                 <div class="card-body">
-                                    <p class="card-text">Conferma la partecipazione di un Oggetto ad un Evento.</p>
+                                    <p class="card-text">Conferma la partecipazione di una Candidatura ad una Votazione.</p>
                                 </div>
                             </div>
                         </div>

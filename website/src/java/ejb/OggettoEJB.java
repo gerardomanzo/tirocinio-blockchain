@@ -2,7 +2,9 @@ package ejb;
 
 import bean.Oggetto;
 import bean.Partecipazione;
+import bean.Utente;
 import com.google.gson.Gson;
+import static ejb.UtenteEJB.URI_BASE;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +50,7 @@ public class OggettoEJB {
 
             response = CLIENT.target(URI_BASE + "/Oggetto")
                     .request()
-                    .post(Entity.entity(result, MediaType.WILDCARD_TYPE).entity(json, MediaType.APPLICATION_JSON));
+                    .post(Entity.entity(json, MediaType.APPLICATION_JSON));
             return oggetto;
         }
         return null;
@@ -129,6 +131,17 @@ public class OggettoEJB {
         }
 
         return lista;
+    }
+    
+    public List<Oggetto> cercaGliOggetti() {
+        Response response = CLIENT.target(URI_BASE + "/Oggetto")
+                .request()
+                .get();
+
+        String body = response.readEntity(String.class);
+        Oggetto[] result = gson.fromJson(body, Oggetto[].class);
+
+        return Arrays.asList(result);
     }
 
 }

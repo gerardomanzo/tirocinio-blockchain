@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Crea evento</title>
+        <title>Crea votazione</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -45,14 +45,14 @@
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto amministratore!</h1>
-                    <h2 class="text-center">Creazione Evento</h2>
+                    <h2 class="text-center">Creazione Votazione</h2>
 
                     <div class="form">
                         <form method="POST" action="CreaEvento">
                             <div class="form-group row">
-                                <label for="nomeEvento" class="col-sm-4 col-form-label">Nome Evento</label>
+                                <label for="nomeEvento" class="col-sm-4 col-form-label">Nome Votazione</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="nomeEvento" id="nomeEvento" placeholder="Nome Evento">
+                                    <input type="text" class="form-control" name="nomeEvento" id="nomeEvento" placeholder="Nome Votazione">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -62,15 +62,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="dataInizio" class="col-sm-4 col-form-label">Inizio Evento</label>
+                                <label for="dataInizio" class="col-sm-4 col-form-label">Inizio Votazione</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="dataInizio" id="dataInizio" placeholder="Inizio Evento">
+                                    <input type="text" class="form-control" name="dataInizio" id="dataInizio" placeholder="Inizio Votazione">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="dataFine" class="col-sm-4 col-form-label">Fine Evento</label>
+                                <label for="dataFine" class="col-sm-4 col-form-label">Fine Votazione</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="dataFine" id="dataFine" placeholder="Fine Evento">
+                                    <input type="text" class="form-control" name="dataFine" id="dataFine" placeholder="Fine Votazione">
                                 </div>
                             </div>
                             <button>Crea!</button>
