@@ -1,8 +1,8 @@
 package ejb;
 
 import bean.Criterio;
-import bean.Evento;
-import bean.Oggetto;
+import bean.Votazione;
+import bean.Candidatura;
 import bean.Partecipazione;
 import bean.Utente;
 import bean.Voto;
@@ -58,26 +58,26 @@ public class IdGenerator {
             keys.add(((Criterio) item).getIdCriterio());
         }
 
-        response = CLIENT.target(URI_BASE + "/Oggetto")
+        response = CLIENT.target(URI_BASE + "/Candidatura")
                 .request()
                 .get();
 
         body = response.readEntity(String.class);
-        result = gson.fromJson(body, Oggetto[].class);
+        result = gson.fromJson(body, Candidatura[].class);
 
         for (Object item : result) {
-            keys.add(((Oggetto) item).getIdOggetto());
+            keys.add(((Candidatura) item).getIdCandidatura());
         }
 
-        response = CLIENT.target(URI_BASE + "/Evento")
+        response = CLIENT.target(URI_BASE + "/Votazione")
                 .request()
                 .get();
 
         body = response.readEntity(String.class);
-        result = gson.fromJson(body, Evento[].class);
+        result = gson.fromJson(body, Votazione[].class);
 
         for (Object item : result) {
-            keys.add(((Evento) item).getIdEvento());
+            keys.add(((Votazione) item).getIdVotazione());
         }
 
         response = CLIENT.target(URI_BASE + "/Partecipazione")
@@ -88,7 +88,7 @@ public class IdGenerator {
         result = gson.fromJson(body, Partecipazione[].class);
 
         for (Object item : result) {
-            keys.add(((Partecipazione) item).getIdEvento());
+            keys.add(((Partecipazione) item).getIdVotazione());
         }
 
         response = CLIENT.target(URI_BASE + "/Voto")

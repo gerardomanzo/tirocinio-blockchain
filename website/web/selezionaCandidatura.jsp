@@ -1,5 +1,6 @@
+<%@page import="bean.Candidatura"%>
 <%@page import="bean.Utente"%>
-<%@page import="bean.Evento"%>
+<%@page import="bean.Votazione"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -7,7 +8,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Visualizza i Risultati</title>
+        <title>Registra candidatura a votazione</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -40,39 +41,36 @@
 
             <!-- Main -->
             <%
-
                 if (utente != null) {
             %>
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto  <%=utente.getNomeUtente()%>!</h1>
-                    <h2 class="text-center">Seleziona la votazione che vuoi visualizzare</h2>
+                    <h2 class="text-center">Registra una candidatura a una votazione</h2>
                     <div class="col-md-8 offset-md-2">
-                        <form action="RisultatiServlet" method="POST">
-                            <input type="hidden" name="action" value="visualizzaEventi">
+                        <form action="PartecipazioneServlet" method="POST">
+                            <input type="hidden" name="action" value="InserisciPartecipazione">
                             <table class="table table-bordered">
                                 <thead class="thead-blue">
                                     <tr >
                                         <th>ID</th>
-                                        <th>Nome votazione</th>
-                                        <th>Data inizio votazione</th>
-                                        <th>Data fine votazione</th>
+                                        <th>Nome Candidatura</th>
+                                        <th>Descrizione</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <%
-                                        List<Evento> lista = (List<Evento>) session.getAttribute("eventi");
+                                        List<Candidatura> lista = (List<Candidatura>) session.getAttribute("candidature");
                                         if (lista != null && lista.size() > 0) {
-                                            for (Evento e : lista) {
+                                            for (Candidatura e : lista) {
                                     %>
                                     <tr>
-                                        <td><%=e.getIdEvento()%></td>
-                                        <td><%=e.getNomeEvento()%></td>
-                                        <td><%=e.getDataInizio().substring(0, 10)%></td>
-                                        <td><%=e.getDataFine().substring(0, 10)%></td>
+                                        <td><%=e.getIdCandidatura()%></td>
+                                        <td><%=e.getNomeCandidatura()%></td>
+                                        <td><%=e.getDescrizione()%></td>
                                         <td>
-                                            <input type="radio" name="idEvento" value="<%=e.getIdEvento()%>">
+                                            <input type="radio" name="idCandidatura" value="<%=e.getIdCandidatura()%>">
                                         </td>
                                     </tr>
                                     <%
@@ -83,7 +81,7 @@
                                     } else {
                                     %>
                                     <tr>
-                                        <td colspan="5">Nessuna votazione registrata!</td>
+                                        <td colspan="5">Nessuna candidatura registrata!</td>
                                     </tr>
                                     <%
                                         }
@@ -91,10 +89,9 @@
                                 </tbody>
 
                             </table>
-
                             <input type="submit" value="Avanti">
                         </form>
-        
+
                         <a href="dashboardUtente.jsp">Torna alla dashboard</a>
                     </div>
                 </div>

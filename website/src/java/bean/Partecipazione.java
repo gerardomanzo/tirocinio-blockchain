@@ -3,13 +3,13 @@ package bean;
 public class Partecipazione {
 
     private String idPartecipazione;
-    private String idEvento;
-    private String idOggetto;
+    private String idVotazione;
+    private String idCandidatura;
     private Boolean statoRegistrazione;
 
-    public Partecipazione(String idEvento, String idOggetto) {
-        this.idEvento = idEvento;
-        this.idOggetto = idOggetto;
+    public Partecipazione(String idVotazione, String idCandidatura) {
+        this.idVotazione = idVotazione;
+        this.idCandidatura = idCandidatura;
         statoRegistrazione = false;
     }
 
@@ -29,20 +29,20 @@ public class Partecipazione {
         this.statoRegistrazione = statoRegistrazione;
     }
 
-    public String getIdEvento() {
-        return idEvento;
+    public String getIdVotazione() {
+        return idVotazione;
     }
 
-    public void setIdEvento(String idEvento) {
-        this.idEvento = idEvento;
+    public void setIdVotazione(String idVotazione) {
+        this.idVotazione = idVotazione;
     }
 
-    public String getIdOggetto() {
-        return idOggetto;
+    public String getIdCandidatura() {
+        return idCandidatura;
     }
 
-    public void setIdOggetto(String idOggetto) {
-        this.idOggetto = idOggetto;
+    public void setIdCandidatura(String idCandidatura) {
+        this.idCandidatura = idCandidatura;
     }
 
 }

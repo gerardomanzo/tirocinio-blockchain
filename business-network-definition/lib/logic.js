@@ -1,22 +1,22 @@
 /**
- * Aggiunge un criterio di valutazione ad un evento.
+ * Aggiunge un criterio di valutazione ad una votazione.
  * @param {it.unisa.AggiungiCriterio} tx
  * @transaction
  */
 function aggiungiCriterio(tx) {
-	var evento = tx.evento;
+	var votazione = tx.votazione;
 	var criterio = tx.criterio;
 
-	if(evento.criteri)
-    	evento.criteri.push(criterio);
+	if(votazione.criteri)
+    	votazione.criteri.push(criterio);
 	else
-    	evento.criteri = [criterio];
+    	votazione.criteri = [criterio];
 
 	// Get the asset registry for the asset.
-	return getAssetRegistry('it.unisa.Evento')
+	return getAssetRegistry('it.unisa.Votazione')
 		.then(function (assetRegistry) {
 			// Update the asset in the asset registry.
-			return assetRegistry.update(evento);
+			return assetRegistry.update(votazione);
 		});
 }
 
@@ -39,20 +39,20 @@ function confermaRegistrazioneUtente(tx) {
 }
 
 /**
- * Conferma la registrazione di un oggetto.
- * @param {it.unisa.ConfermaRegistrazioneOggetto} tx
+ * Conferma la registrazione di una candidatura.
+ * @param {it.unisa.ConfermaRegistrazioneCandidatura} tx
  * @transaction
  */
-function confermaRegistrazioneOggetto(tx) {
-	var oggetto = tx.oggetto;
+function confermaRegistrazioneCandidatura(tx) {
+	var candidatura = tx.candidatura;
 
-	oggetto.statoRegistrazione = true;
+	candidatura.statoRegistrazione = true;
 
 	// Get the asset registry for the asset.
-	return getAssetRegistry('it.unisa.Oggetto')
+	return getAssetRegistry('it.unisa.Candidatura')
 		.then(function (assetRegistry) {
 			// Update the asset in the asset registry.
-			return assetRegistry.update(oggetto);
+			return assetRegistry.update(candidatura);
 		});
 }
 

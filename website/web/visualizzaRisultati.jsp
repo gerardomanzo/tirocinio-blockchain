@@ -1,9 +1,9 @@
 <%@page import="bean.Partecipazione"%>
-<%@page import="bean.Oggetto"%>
+<%@page import="bean.Candidatura"%>
 <%@page import="bean.Criterio"%>
 <%@page import="bean.Voto"%>
 <%@page import="bean.Utente"%>
-<%@page import="bean.Evento"%>
+<%@page import="bean.Votazione"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -53,7 +53,7 @@
                             List<Voto> lista = (List<Voto>) session.getAttribute("voti");
                             List<Criterio> criteri = (List<Criterio>) session.getAttribute("criteri");
                             List<Partecipazione> partecipazioni = (List<Partecipazione>) session.getAttribute("partecipazioni");
-                            List<Oggetto> oggetti = (List<Oggetto>) session.getAttribute("oggetti");
+                            List<Candidatura> candidature = (List<Candidatura>) session.getAttribute("candidature");
 
                             if (lista != null && lista.size() > 0) {
                         %>
@@ -80,11 +80,11 @@
                                 <tr>
                                     <%
                                         for (int j = 0; j < partecipazioni.size() && !trovato; j++) {
-                                            for (int k = 0; k < oggetti.size() && !trovato; k++) {
-                                                if (lista.get(i).getPartecipazione().contains(partecipazioni.get(j).getIdPartecipazione()) && partecipazioni.get(j).getIdOggetto().contains(oggetti.get(k).getIdOggetto())) {
+                                            for (int k = 0; k < candidature.size() && !trovato; k++) {
+                                                if (lista.get(i).getPartecipazione().contains(partecipazioni.get(j).getIdPartecipazione()) && partecipazioni.get(j).getIdCandidatura().contains(candidature.get(k).getIdCandidatura())) {
                                                     trovato = true;
                                     %>
-                                    <td><%=oggetti.get(k).getNomeOggetto()%></td>
+                                    <td><%=candidature.get(k).getNomeCandidatura()%></td>
                                     <%          }
                                             }
                                         }

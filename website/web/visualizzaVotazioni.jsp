@@ -1,5 +1,5 @@
 <%@page import="bean.Utente"%>
-<%@page import="bean.Evento"%>
+<%@page import="bean.Votazione"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -7,7 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Vota!</title>
+        <title>Visualizza i Risultati</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -46,9 +46,10 @@
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto  <%=utente.getNomeUtente()%>!</h1>
-                    <h2 class="text-center">Vota!</h2>
+                    <h2 class="text-center">Seleziona la votazione che vuoi visualizzare</h2>
                     <div class="col-md-8 offset-md-2">
-                        <form action="Voto" method="POST">
+                        <form action="RisultatiServlet" method="POST">
+                            <input type="hidden" name="action" value="visualizzaVotazioni">
                             <table class="table table-bordered">
                                 <thead class="thead-blue">
                                     <tr >
@@ -61,17 +62,17 @@
                                 </thead>
                                 <tbody>
                                     <%
-                                        List<Evento> lista = (List<Evento>) session.getAttribute("eventi");
+                                        List<Votazione> lista = (List<Votazione>) session.getAttribute("votazioni");
                                         if (lista != null && lista.size() > 0) {
-                                            for (Evento e : lista) {
+                                            for (Votazione e : lista) {
                                     %>
                                     <tr>
-                                        <td><%=e.getIdEvento()%></td>
-                                        <td><%=e.getNomeEvento()%></td>
+                                        <td><%=e.getIdVotazione()%></td>
+                                        <td><%=e.getNomeVotazione()%></td>
                                         <td><%=e.getDataInizio().substring(0, 10)%></td>
                                         <td><%=e.getDataFine().substring(0, 10)%></td>
                                         <td>
-                                            <input type="radio" name="idEvento" value="<%=e.getIdEvento()%>">
+                                            <input type="radio" name="idVotazione" value="<%=e.getIdVotazione()%>">
                                         </td>
                                     </tr>
                                     <%
@@ -82,7 +83,7 @@
                                     } else {
                                     %>
                                     <tr>
-                                        <td colspan="5">Nessuna votazione registrata o hai già votato a tutte le votazioni!</td>
+                                        <td colspan="5">Nessuna votazione registrata!</td>
                                     </tr>
                                     <%
                                         }

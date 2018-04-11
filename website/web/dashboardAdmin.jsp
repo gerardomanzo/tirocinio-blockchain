@@ -48,7 +48,7 @@
                         <div class="card-deck">
                             <div class="card">
                                 <div class="card-header bg-blue">
-                                    <a href="creaEvento.jsp" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Crea nuova Votazione</a>
+                                    <a href="creaVotazione.jsp" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Crea nuova Votazione</a>
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text">Crea una nuova Votazione.</p>
@@ -82,7 +82,7 @@
                             </div>
                             <div class="card">
                                 <div class="card-header bg-blue">
-                                    <a href="ConfermaOggetto" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Conferma registrazione Candidatura</a>
+                                    <a href="ConfermaCandidatura" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Conferma registrazione Candidatura</a>
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text">Conferma la registrazione di una Candidatura.</p>

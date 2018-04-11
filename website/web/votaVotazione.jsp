@@ -1,4 +1,5 @@
 <%@page import="bean.Utente"%>
+<%@page import="bean.Votazione"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -6,7 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Registrazione candidatura</title>
+        <title>Vota!</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -44,28 +45,55 @@
             %>
             <section>
                 <div class="container-fluid">
-                    <h1 class="text-center">Benvenuto <%=utente.getNomeUtente()%>!</h1>
+                    <h1 class="text-center">Benvenuto  <%=utente.getNomeUtente()%>!</h1>
+                    <h2 class="text-center">Vota!</h2>
+                    <div class="col-md-8 offset-md-2">
+                        <form action="Voto" method="POST">
+                            <table class="table table-bordered">
+                                <thead class="thead-blue">
+                                    <tr >
+                                        <th>ID</th>
+                                        <th>Nome votazione</th>
+                                        <th>Data inizio votazione</th>
+                                        <th>Data fine votazione</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        List<Votazione> lista = (List<Votazione>) session.getAttribute("votazioni");
+                                        if (lista != null && lista.size() > 0) {
+                                            for (Votazione e : lista) {
+                                    %>
+                                    <tr>
+                                        <td><%=e.getIdVotazione()%></td>
+                                        <td><%=e.getNomeVotazione()%></td>
+                                        <td><%=e.getDataInizio().substring(0, 10)%></td>
+                                        <td><%=e.getDataFine().substring(0, 10)%></td>
+                                        <td>
+                                            <input type="radio" name="idVotazione" value="<%=e.getIdVotazione()%>">
+                                        </td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>
 
-                    <h2 class="text-center">Registrazione Candidatura</h2>
+                                    <%
+                                    } else {
+                                    %>
+                                    <tr>
+                                        <td colspan="5">Nessuna votazione registrata o hai già votato a tutte le votazioni!</td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>    
+                                </tbody>
 
-                    <div class="form">
-                        <form method="POST" action="RegistrazioneOggetto">
-                            <div class="form-group row">
-                                <label for="nomeOggetto" class="col-sm-4 col-form-label">Nome Candidatura</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="nomeOggetto" id="nomeOggetto" placeholder="Nome Candidatura">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="descrizioneOggetto" class="col-sm-4 col-form-label">Descrizione</label>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control" name="descrizioneOggetto" id="descrizioneOggetto" rows="5" maxlength="100" style="resize: none;"></textarea>
-                                </div>
-                            </div>
+                            </table>
 
-                            <button>Registra!</button>
+                            <input type="submit" value="Avanti">
                         </form>
-                        
+        
                         <a href="dashboardUtente.jsp">Torna alla dashboard</a>
                     </div>
                 </div>

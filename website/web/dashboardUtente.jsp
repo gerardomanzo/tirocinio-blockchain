@@ -52,7 +52,7 @@
                         <div class="card-deck">
                             <div class="card">
                                 <div class="card-header bg-blue">
-                                    <a href="registrazioneOggetto.jsp" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Registra nuova Candidatura</a>
+                                    <a href="registrazioneCandidatura.jsp" class="text-white"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>Registra nuova Candidatura</a>
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text">Registra la tua Candidatura.</p>

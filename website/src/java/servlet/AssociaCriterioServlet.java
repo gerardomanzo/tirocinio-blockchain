@@ -1,8 +1,8 @@
 package servlet;
 
 import bean.Criterio;
-import bean.Evento;
-import ejb.EventoEJB;
+import bean.Votazione;
+import ejb.VotazioneEJB;
 import java.io.IOException;
 import java.util.List;
 import javax.inject.Inject;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 public class AssociaCriterioServlet extends HttpServlet {
 
     @Inject
-    private EventoEJB eventoEJB;
+    private VotazioneEJB votazioneEJB;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,12 +25,12 @@ public class AssociaCriterioServlet extends HttpServlet {
         Boolean isAdminLogged = (Boolean) session.getAttribute("loginAdmin");
 
         if (isAdminLogged) {
-            List<Evento> lista = eventoEJB.cercaEventi();
+            List<Votazione> lista = votazioneEJB.cercaVotazioni();
 
-            session.removeAttribute("eventi");
-            session.setAttribute("eventi", lista);
+            session.removeAttribute("votazioni");
+            session.setAttribute("votazioni", lista);
 
-            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/sceltaEvento.jsp");
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/sceltaVotazione.jsp");
             dispatcher.forward(request, response);
 
         } else {
@@ -47,15 +47,15 @@ public class AssociaCriterioServlet extends HttpServlet {
 
         if (isAdminLogged) {
 
-            String idEvento = request.getParameter("idEvento");
+            String idVotazione = request.getParameter("idVotazione");
 
-            List<Criterio> lista = eventoEJB.cercaTuttiCriteri(idEvento);
+            List<Criterio> lista = votazioneEJB.cercaTuttiCriteri(idVotazione);
 
             session.removeAttribute("criteri");
             session.setAttribute("criteri", lista);
 
-            session.removeAttribute("idEvento");
-            session.setAttribute("idEvento", idEvento);
+            session.removeAttribute("idVotazione");
+            session.setAttribute("idVotazione", idVotazione);
 
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/sceltaCriterio.jsp");
             dispatcher.forward(request, response);

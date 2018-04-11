@@ -32,8 +32,8 @@ public class RisultatiTotali extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("utente");
 
         if (utente != null) {
-            String idEvento = (String) session.getAttribute("idEvento");
-            List<Partecipazione> partecipazioni = partecipazioneEJb.cercaPartecipazioniByIdEvento(idEvento);
+            String idVotazione = (String) session.getAttribute("idVotazione");
+            List<Partecipazione> partecipazioni = partecipazioneEJb.cercaPartecipazioniByIdVotazione(idVotazione);
 
             List<Voto> voti = votoEJB.cercaVotoByIdPartecipation(partecipazioni);
             List<Utente> utenti = utenteEJB.cercaTuttiGliUtenti();

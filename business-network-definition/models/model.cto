@@ -14,43 +14,51 @@ asset Criterio identified by idCriterio {
 	o Integer maxPunteggio default = 10
 }
 
-asset Oggetto identified by idOggetto {
-	o String idOggetto
-	o String nomeOggetto
+asset Candidatura identified by idCandidatura {
+	o String idCandidatura
+	o String nomeCandidatura
 	o String descrizione
 	o Boolean statoRegistrazione default = false
 	--> Utente proprietario
 }
 
-asset Evento identified by idEvento {
-    o String idEvento
-    o String nomeEvento
+asset Votazione identified by idVotazione {
+    o String idVotazione
+    o String nomeVotazione
     o String descrizione
     o DateTime dataInizio
     o DateTime dataFine
     --> Criterio[] criteri optional
 }
   
-asset Partecipazione identified by idPartecipazione{
+asset Partecipazione identified by idPartecipazione {
 	o String idPartecipazione
- 	o String idEvento
-  	o String idOggetto
+ 	--> Votazione idVotazione
+  	--> Candidatura idCandidatura
   	o Boolean statoRegistrazione default = false
+}
+
+asset Voto identified by idVoto {
+	o String idVoto
+	--> Partecipazione partecipazione
+	--> Criterio criterio
+	--> Utente utente
+	o Integer punteggio
 }
 
 transaction ConfermaRegistrazioneUtente {
     --> Utente utente
 }
 
-transaction ConfermaRegistrazioneOggetto {
-    --> Oggetto oggetto
+transaction ConfermaRegistrazioneCandidatura {
+    --> Candidatura candidatura
 }
 
 transaction ConfermaRegistrazionePartecipazione{
-  -->Partecipazione partecipazione
+	-->Partecipazione partecipazione
 }
 
 transaction AggiungiCriterio {
-    --> Evento evento
+    --> Votazione votazione
     --> Criterio criterio
 }

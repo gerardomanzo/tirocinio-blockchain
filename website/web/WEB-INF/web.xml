@@ -17,20 +17,20 @@
         <servlet-class>servlet.ConfermaUtenteServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ConfermaOggettoServlet</servlet-name>
-        <servlet-class>servlet.ConfermaOggettoServlet</servlet-class>
+        <servlet-name>ConfermaCandidaturaServlet</servlet-name>
+        <servlet-class>servlet.ConfermaCandidaturaServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CreaCriterioServlet</servlet-name>
         <servlet-class>servlet.CreaCriterioServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RegistrazioneOggettoServlet</servlet-name>
-        <servlet-class>servlet.RegistrazioneOggettoServlet</servlet-class>
+        <servlet-name>RegistrazioneCandidaturaServlet</servlet-name>
+        <servlet-class>servlet.RegistrazioneCandidaturaServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CreaEventoServlet</servlet-name>
-        <servlet-class>servlet.CreaEventoServlet</servlet-class>
+        <servlet-name>CreaVotazioneServlet</servlet-name>
+        <servlet-class>servlet.CreaVotazioneServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AssociaCriterioServlet</servlet-name>
@@ -89,20 +89,20 @@
         <url-pattern>/ConfermaUtente</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ConfermaOggettoServlet</servlet-name>
-        <url-pattern>/ConfermaOggetto</url-pattern>
+        <servlet-name>ConfermaCandidaturaServlet</servlet-name>
+        <url-pattern>/ConfermaCandidatura</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CreaCriterioServlet</servlet-name>
         <url-pattern>/CreaCriterio</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RegistrazioneOggettoServlet</servlet-name>
-        <url-pattern>/RegistrazioneOggetto</url-pattern>
+        <servlet-name>RegistrazioneCandidaturaServlet</servlet-name>
+        <url-pattern>/RegistrazioneCandidatura</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CreaEventoServlet</servlet-name>
-        <url-pattern>/CreaEvento</url-pattern>
+        <servlet-name>CreaVotazioneServlet</servlet-name>
+        <url-pattern>/CreaVotazione</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AssociaCriterioServlet</servlet-name>

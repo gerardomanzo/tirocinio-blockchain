@@ -1,14 +1,14 @@
 package servlet;
 
 import bean.Criterio;
-import bean.Evento;
-import bean.Oggetto;
+import bean.Votazione;
+import bean.Candidatura;
 import bean.Partecipazione;
 import bean.Utente;
 import bean.Voto;
 import ejb.CriterioEJB;
-import ejb.EventoEJB;
-import ejb.OggettoEJB;
+import ejb.VotazioneEJB;
+import ejb.CandidaturaEJB;
 import ejb.PartecipazioneEJB;
 import ejb.VotoEJB;
 import java.io.IOException;
@@ -29,11 +29,11 @@ public class RisultatiServlet extends HttpServlet {
     @Inject
     private VotoEJB votoEJB;
     @Inject
-    private EventoEJB eventoEJB;
+    private VotazioneEJB votazioneEJB;
     @Inject
     private CriterioEJB criterioEJB;
     @Inject 
-    private OggettoEJB oggettoEJB;
+    private CandidaturaEJB candidaturaEJB;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,11 +42,11 @@ public class RisultatiServlet extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("utente");
 
         if (utente != null) {
-            List<Evento> lista = eventoEJB.cercaEventi();
-            session.removeAttribute("eventi");
-            session.setAttribute("eventi", lista);
+            List<Votazione> lista = votazioneEJB.cercaVotazioni();
+            session.removeAttribute("votazioni");
+            session.setAttribute("votazioni", lista);
 
-            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/visualizzaEventi.jsp");
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/visualizzaVotazioni.jsp");
             dispatcher.forward(request, response);
         } else {
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboardUtente.jsp");
@@ -62,9 +62,9 @@ public class RisultatiServlet extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("utente");
 
         if (utente != null) {
-            String idEvento = request.getParameter("idEvento");
+            String idVotazione = request.getParameter("idVotazione");
 
-            List<Partecipazione> partecipazioni = partecipazioneEJB.cercaPartecipazioniByIdEvento(idEvento);
+            List<Partecipazione> partecipazioni = partecipazioneEJB.cercaPartecipazioniByIdVotazione(idVotazione);
             List<Voto> voti = votoEJB.cercaVotoByIdPartecipation(partecipazioni);
             List<Voto> votiUtente = new ArrayList<>();
 
@@ -76,11 +76,11 @@ public class RisultatiServlet extends HttpServlet {
                 }
             }
 
-            List<Criterio> criteri = eventoEJB.cercaCriteriEvento(idEvento);
-            List<Oggetto> oggetti = oggettoEJB.cercaGliOggetti();
+            List<Criterio> criteri = votazioneEJB.cercaCriteriVotazione(idVotazione);
+            List<Candidatura> candidature = candidaturaEJB.cercaGliCandidature();
 
-            session.removeAttribute("idEvento");
-            session.setAttribute("idEvento", idEvento);
+            session.removeAttribute("idVotazione");
+            session.setAttribute("idVotazione", idVotazione);
 
             session.removeAttribute("voti");
             session.setAttribute("voti", votiUtente);
@@ -91,8 +91,8 @@ public class RisultatiServlet extends HttpServlet {
             session.removeAttribute("partecipazioni");
             session.setAttribute("partecipazioni", partecipazioni);
             
-            session.removeAttribute("oggetti");
-            session.setAttribute("oggetti", oggetti);
+            session.removeAttribute("candidature");
+            session.setAttribute("candidature", candidature);
 
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/visualizzaRisultati.jsp");
             dispatcher.forward(request, response);

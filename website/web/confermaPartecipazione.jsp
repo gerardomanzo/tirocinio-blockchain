@@ -66,8 +66,8 @@
                                 %>
                                 <tr>
                                     <td><%=u.getIdPartecipazione()%></td>
-                                    <td><%=u.getIdEvento().substring(25, 33)%></td>
-                                    <td><%=u.getIdOggetto().substring(26, 34)%></td>
+                                    <td><%=u.getIdVotazione().substring(28, 36)%></td>
+                                    <td><%=u.getIdCandidatura().substring(30, 38)%></td>
                                     <td>
                                         <form action="ConfermaPartecipazione" method="POST">
                                             <input type="hidden" name="idPartecipazione" value="<%=u.getIdPartecipazione()%>">

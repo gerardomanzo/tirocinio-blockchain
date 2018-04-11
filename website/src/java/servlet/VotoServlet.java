@@ -1,10 +1,10 @@
 package servlet;
 
 import bean.Criterio;
-import bean.Evento;
-import bean.Oggetto;
+import bean.Votazione;
+import bean.Candidatura;
 import bean.Utente;
-import ejb.EventoEJB;
+import ejb.VotazioneEJB;
 import ejb.PartecipazioneEJB;
 import ejb.VotoEJB;
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class VotoServlet extends HttpServlet {
     private VotoEJB votoEJB;
 
     @Inject
-    private EventoEJB eventoEJB;
+    private VotazioneEJB votazioneEJB;
 
     @Inject
     private PartecipazioneEJB partecipazioneEJB;
@@ -35,12 +35,12 @@ public class VotoServlet extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("utente");
 
         if (utente != null) {
-            List<Evento> lista = votoEJB.cercaEventiVoto(utente.getIdUtente());
+            List<Votazione> lista = votoEJB.cercaVotazioniVoto(utente.getIdUtente());
 
-            session.removeAttribute("eventi");
-            session.setAttribute("eventi", lista);
+            session.removeAttribute("votazioni");
+            session.setAttribute("votazioni", lista);
 
-            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/votaEvento.jsp");
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/votaVotazione.jsp");
             dispatcher.forward(request, response);
         } else {
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/index.html");
@@ -56,22 +56,22 @@ public class VotoServlet extends HttpServlet {
 
         if (utente != null) {
 
-            String idEvento = request.getParameter("idEvento");
+            String idVotazione = request.getParameter("idVotazione");
 
-            List<Criterio> listaCriteri = eventoEJB.cercaCriteriEvento(idEvento);
+            List<Criterio> listaCriteri = votazioneEJB.cercaCriteriVotazione(idVotazione);
 
-            List<Oggetto> listaOggetti = partecipazioneEJB.cercaOggettiEvento(idEvento);
+            List<Candidatura> listaCandidature = partecipazioneEJB.cercaCandidatureVotazione(idVotazione);
 
-            session.removeAttribute("idEvento");
-            session.setAttribute("idEvento", idEvento);
+            session.removeAttribute("idVotazione");
+            session.setAttribute("idVotazione", idVotazione);
 
             session.removeAttribute("criteri");
             session.setAttribute("criteri", listaCriteri);
 
-            session.removeAttribute("oggetti");
-            session.setAttribute("oggetti", listaOggetti);
+            session.removeAttribute("candidature");
+            session.setAttribute("candidature", listaCandidature);
 
-            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/votaOggetto.jsp");
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/votaCandidatura.jsp");
             dispatcher.forward(request, response);
         } else {
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/index.html");

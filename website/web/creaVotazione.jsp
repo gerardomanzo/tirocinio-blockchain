@@ -48,11 +48,11 @@
                     <h2 class="text-center">Creazione Votazione</h2>
 
                     <div class="form">
-                        <form method="POST" action="CreaEvento">
+                        <form method="POST" action="CreaVotazione">
                             <div class="form-group row">
-                                <label for="nomeEvento" class="col-sm-4 col-form-label">Nome Votazione</label>
+                                <label for="nomeVotazione" class="col-sm-4 col-form-label">Nome Votazione</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="nomeEvento" id="nomeEvento" placeholder="Nome Votazione">
+                                    <input type="text" class="form-control" name="nomeVotazione" id="nomeVotazione" placeholder="Nome Votazione">
                                 </div>
                             </div>
                             <div class="form-group row">

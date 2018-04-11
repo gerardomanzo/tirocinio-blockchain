@@ -1,6 +1,5 @@
-<%@page import="bean.Criterio"%>
-<%@page import="bean.Oggetto"%>
 <%@page import="bean.Utente"%>
+<%@page import="bean.Votazione"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -8,7 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Vota!</title>
+        <title>Registra candidatura a votazione</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -47,51 +46,56 @@
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto  <%=utente.getNomeUtente()%>!</h1>
-                    <h2 class="text-center">Vota!</h2>
+                    <h2 class="text-center">Registra una candidatura a una votazione</h2>
                     <div class="col-md-8 offset-md-2">
-                        <div class = "form">
-                            <form action="ConfermaVoti" method="POST">
-
-                                <%
-                                    List<Oggetto> oggetti = (List<Oggetto>) session.getAttribute("oggetti");
-                                    List<Criterio> criteri = (List<Criterio>) session.getAttribute("criteri");
-
-                                    int i = 0;
-
-                                    for (Oggetto o : oggetti) {
-                                %>
-                                <div class="form-group row">
-                                    <div class="form-box">
-                                        <p class="title"><%=o.getNomeOggetto()%></p>
-                                        <input type="hidden" name="idOggetto<%=i%>" value="<%=o.getIdOggetto()%>">
-
-                                        <%
-                                            int j = 0;
-                                            for (Criterio c : criteri) {
-                                        %>
-                                        <label class="nameLabel" for="criterio<%=i%><%=j%>"><%=c.getNomeCriterio()%> (MAX = <%=c.getMaxPunteggio()%>)</label>
-                                        <input type="hidden" name="idCriterio<%=i%><%=j%>" value="<%=c.getIdCriterio()%>">
-                                        <input type="text" name="criterio<%=i%><%=j%>" id="criterio<%=i%><%=j%>">
-
-                                        <%
-                                                j++;
-                                            }%>
-                                    </div>
+                        <form action="PartecipazioneServlet" method="POST">
+                            <input type="hidden" name="action" value="visualizzaCandidature">
+                            <table class="table table-bordered">
+                                <thead class="thead-blue">
+                                    <tr >
+                                        <th>ID</th>
+                                        <th>Nome votazione</th>
+                                        <th>Data inizio votazione</th>
+                                        <th>Data fine votazione</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     <%
-                                        i++;
+                                        List<Votazione> lista = (List<Votazione>) session.getAttribute("votazioni");
+                                        if (lista != null && lista.size() > 0) {
+                                            for (Votazione e : lista) {
                                     %>
-                                </div>
-                                <%  }
-                                %>  
+                                    <tr>
+                                        <td><%=e.getIdVotazione()%></td>
+                                        <td><%=e.getNomeVotazione()%></td>
+                                        <td><%=e.getDataInizio().substring(0, 10)%></td>
+                                        <td><%=e.getDataFine().substring(0, 10)%></td>
+                                        <td>
+                                            <input type="radio" name="idVotazione" value="<%=e.getIdVotazione()%>">
+                                        </td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>
 
+                                    <%
+                                    } else {
+                                    %>
+                                    <tr>
+                                        <td colspan="5">Nessuna votazione registrata!</td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>    
+                                </tbody>
 
-                                <input type="hidden" name="numOggetti" value="<%=oggetti.size()%>">
-                                <input type="hidden" name="numCriteri" value="<%=criteri.size()%>">
-                                <input type="submit" class="buttonColor" value="Vota!">
-                            </form>
+                            </table>
 
-                            <a href="dashboardUtente.jsp">Torna alla dashboard</a>
-                        </div>
+                            <input type="submit" value="Avanti">
+                        </form>
+        
+                        <a href="dashboardUtente.jsp">Torna alla dashboard</a>
                     </div>
                 </div>
             </section>				

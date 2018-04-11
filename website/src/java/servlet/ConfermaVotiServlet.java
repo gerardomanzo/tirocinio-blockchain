@@ -29,22 +29,22 @@ public class ConfermaVotiServlet extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("utente");
 
         if (utente != null) {
-            String idEvento = (String) session.getAttribute("idEvento");
+            String idVotazione = (String) session.getAttribute("idVotazione");
 
-            Integer numOggetti = Integer.parseInt(request.getParameter("numOggetti"));
+            Integer numcandidature = Integer.parseInt(request.getParameter("numCandidature"));
             Integer numCriteri = Integer.parseInt(request.getParameter("numCriteri"));
 
-            for (int i = 0; i < numOggetti; i++) {
-                String idOggetto = request.getParameter("idOggetto" + i);
+            for (int i = 0; i < numcandidature; i++) {
+                String idCandidatura = request.getParameter("idCandidatura" + i);
 
-                Partecipazione p = partecipazioneEJB.cercaPartecipazione(idEvento, idOggetto);
+                Partecipazione p = partecipazioneEJB.cercaPartecipazione(idVotazione, idCandidatura);
 
-                System.out.println("idEvento " + idEvento);
-                System.out.println("idOggetto " + idOggetto);
+                System.out.println("idVotazione " + idVotazione);
+                System.out.println("idCandidatura " + idCandidatura);
 
                 System.out.println("idPartecipazione " + p.getIdPartecipazione());
-                System.out.println("idEvento " + p.getIdEvento());
-                System.out.println("idOggetto " + p.getIdOggetto());
+                System.out.println("idVotazione " + p.getIdVotazione());
+                System.out.println("idCandidatura " + p.getIdCandidatura());
 
                 for (int j = 0; j < numCriteri; j++) {
                     String idCriterio = request.getParameter("idCriterio" + i + "" + j);

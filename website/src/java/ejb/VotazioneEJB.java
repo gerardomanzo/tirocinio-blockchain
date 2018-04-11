@@ -1,7 +1,7 @@
 package ejb;
 
 import bean.Criterio;
-import bean.Evento;
+import bean.Votazione;
 import com.google.gson.Gson;
 import java.net.URI;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import javax.ws.rs.core.UriBuilder;
 
 @Stateless
 @LocalBean
-public class EventoEJB {
+public class VotazioneEJB {
 
     public final static URI URI_QUERY = UriBuilder.fromUri("http://localhost:3000/api/queries").build();
     public final static URI URI_BASE = UriBuilder.fromUri("http://localhost:3000/api").build();
@@ -30,52 +30,51 @@ public class EventoEJB {
 
     private final Gson gson = new Gson();
 
-    public Evento creaEvento(Evento evento) {
+    public Votazione creaVotazione(Votazione votazione) {
 
-        Response response = CLIENT.target(URI_QUERY + "/findByNomeEvento")
-                .queryParam("param", evento.getNomeEvento())
+        Response response = CLIENT.target(URI_QUERY + "/findByNomeVotazione")
+                .queryParam("param", votazione.getNomeVotazione())
                 .request()
                 .get();
 
         String body = response.readEntity(String.class);
 
-        Evento[] result = gson.fromJson(body, Evento[].class);
+        Votazione[] result = gson.fromJson(body, Votazione[].class);
 
         if (result.length == 0) {
-            evento.setIdEvento(idGen.nextId());
+            votazione.setIdVotazione(idGen.nextId());
 
-            String json = gson.toJson(evento);
+            String json = gson.toJson(votazione);
 
-            System.out.println("json=" + json);
-            response = CLIENT.target(URI_BASE + "/Evento")
+            response = CLIENT.target(URI_BASE + "/Votazione")
                     .request()
                     .post(Entity.entity(json, MediaType.APPLICATION_JSON));
-            return evento;
+            return votazione;
         }
         return null;
 
     }
 
-    public List<Evento> cercaEventi() {
-        Response response = CLIENT.target(URI_BASE + "/Evento")
+    public List<Votazione> cercaVotazioni() {
+        Response response = CLIENT.target(URI_BASE + "/Votazione")
                 .request()
                 .get();
 
         String body = response.readEntity(String.class);
 
-        Evento[] result = gson.fromJson(body, Evento[].class);
+        Votazione[] result = gson.fromJson(body, Votazione[].class);
 
         return Arrays.asList(result);
     }
 
-    public List<Criterio> cercaTuttiCriteri(String idEvento) {
-        Response response = CLIENT.target(URI_BASE + "/Evento/" + idEvento)
+    public List<Criterio> cercaTuttiCriteri(String idVotazione) {
+        Response response = CLIENT.target(URI_BASE + "/Votazione/" + idVotazione)
                 .request()
                 .get();
 
         String body = response.readEntity(String.class);
 
-        Evento evento = gson.fromJson(body, Evento.class);
+        Votazione votazione = gson.fromJson(body, Votazione.class);
 
         response = CLIENT.target(URI_BASE + "/Criterio")
                 .request()
@@ -85,7 +84,7 @@ public class EventoEJB {
 
         Criterio[] criteri = gson.fromJson(body, Criterio[].class);
 
-        List<String> listaCriteri = evento.getCriteri();
+        List<String> listaCriteri = votazione.getCriteri();
 
         if (listaCriteri != null) {
 
@@ -111,24 +110,24 @@ public class EventoEJB {
         return Arrays.asList(criteri);
     }
 
-    public void aggiungiCriterio(String idEvento, String idCriterio) {
-        String json = "{\"evento\": \"resource:it.unisa.Evento#" + idEvento + "\", \"criterio\": \"resource:it.unisa.Criterio#" + idCriterio + "\"}";
+    public void aggiungiCriterio(String idVotazione, String idCriterio) {
+        String json = "{\"votazione\": \"resource:it.unisa.Votazione#" + idVotazione + "\", \"criterio\": \"resource:it.unisa.Criterio#" + idCriterio + "\"}";
 
         Response response = CLIENT.target(URI_BASE + "/AggiungiCriterio")
                 .request()
                 .post(Entity.entity(json, MediaType.APPLICATION_JSON));
     }
 
-    public List<Criterio> cercaCriteriEvento(String idEvento) {
-        Response response = CLIENT.target(URI_BASE + "/Evento/" + idEvento)
+    public List<Criterio> cercaCriteriVotazione(String idVotazione) {
+        Response response = CLIENT.target(URI_BASE + "/Votazione/" + idVotazione)
                 .request()
                 .get();
 
         String body = response.readEntity(String.class);
 
-        Evento evento = gson.fromJson(body, Evento.class);
+        Votazione votazione = gson.fromJson(body, Votazione.class);
 
-        List<String> lista = evento.getCriteri();
+        List<String> lista = votazione.getCriteri();
 
         List<Criterio> listaCriterio = new ArrayList<>();
 

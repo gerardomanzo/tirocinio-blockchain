@@ -1,4 +1,4 @@
-<%@page import="bean.Oggetto"%>
+<%@page import="bean.Votazione"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Conferma registrazione candidatura</title>
+        <title>Associa criterio a votazione</title>
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
@@ -33,61 +33,68 @@
                     <a href="Logout" style="color: white"> <i class="fa fa-power-off fa-3x float-xs-right"></i> </a>
 
 
-
                     <% }  %>
 
                 </nav>
             </header>
             <!-- /Header -->
 
-
+            <!-- Main -->
             <!-- Main -->
             <%
+
                 if (login != null && login.booleanValue()) {
             %>
             <section>
                 <div class="container-fluid">
                     <h1 class="text-center">Benvenuto amministratore!</h1>
-                    <h2 class="text-center">Conferma registrazione Candidatura</h2>
+                    <h2 class="text-center">Associa Criterio a Votazione</h2>
                     <div class="col-md-8 offset-md-2">
-                        <table class="table table-bordered">
-                            <thead class="thead-blue">
-                                <tr >
-                                    <th>ID</th>
-                                    <th>Nome candidatura</th>
-                                    <th>Descrizione</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%
-                                    List<Oggetto> lista = (List<Oggetto>) session.getAttribute("oggettiNonRegistrati");
-                                    if (lista != null && lista.size() > 0) {
-                                        for (Oggetto u : lista) {
-                                %>
-                                <tr>
-                                    <td><%=u.getIdOggetto()%></td>
-                                    <td><%=u.getNomeOggetto()%></td>
-                                    <td><%=u.getDescrizione()%></td>
-                                    <td>
-                                        <form action="ConfermaOggetto" method="POST">
-                                            <input type="hidden" name="idOggetto" value="<%=u.getIdOggetto()%>">
-                                            <input type="submit" value="Conferma">
-                                        </form>
-                                    </td>
-                                </tr>
-                                <%
-                                    }
-                                } else {
-                                %>
-                                <tr>
-                                    <td colspan="4">Nessuna candidatura in attesa di conferma!</td>
-                                </tr>
-                                <%
-                                    }
-                                %>
-                            </tbody>
-                        </table>
+                        <form action="AssociaCriterio" method="POST">
+                            <table class="table table-bordered">
+                                <thead class="thead-blue">
+                                    <tr >
+                                        <th>ID</th>
+                                        <th>Nome votazione</th>
+                                        <th>Data inizio votazione</th>
+                                        <th>Data fine votazione</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                        List<Votazione> lista = (List<Votazione>) session.getAttribute("votazioni");
+                                        if (lista != null && lista.size() > 0) {
+                                            for (Votazione e : lista) {
+                                    %>
+                                    <tr>
+                                        <td><%=e.getIdVotazione()%></td>
+                                        <td><%=e.getNomeVotazione()%></td>
+                                        <td><%=e.getDataInizio().substring(0, 10)%></td>
+                                        <td><%=e.getDataFine().substring(0, 10)%></td>
+                                        <td>
+                                            <input type="radio" name="idVotazione" value="<%=e.getIdVotazione()%>">
+                                        </td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>
+
+                                    <%
+                                    } else {
+                                    %>
+                                    <tr>
+                                        <td colspan="5">Nessuna votazione registrata!</td>
+                                    </tr>
+                                    <%
+                                        }
+                                    %>    
+                                </tbody>
+
+                            </table>
+
+                            <input type="submit" value="Avanti">
+                        </form>
 
                         <a href="dashboardAdmin.jsp">Torna alla dashboard</a>
                     </div>

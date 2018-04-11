@@ -1,8 +1,8 @@
 package servlet;
 
-import bean.Oggetto;
+import bean.Candidatura;
 import bean.Utente;
-import ejb.OggettoEJB;
+import ejb.CandidaturaEJB;
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class RegistrazioneOggettoServlet extends HttpServlet {
+public class RegistrazioneCandidaturaServlet extends HttpServlet {
 
     @Inject
-    private OggettoEJB oggettoEJB;
+    private CandidaturaEJB candidaturaEJB;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,19 +24,19 @@ public class RegistrazioneOggettoServlet extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("utente");
 
         if (utente != null) {
-            String nomeOggetto = request.getParameter("nomeOggetto");
-            String descrizioneOggetto = request.getParameter("descrizioneOggetto");
+            String nomeCandidatura = request.getParameter("nomeCandidatura");
+            String descrizioneCandidatura = request.getParameter("descrizioneCandidatura");
 
-            Oggetto oggetto = new Oggetto(nomeOggetto, descrizioneOggetto);
-            oggetto.setProprietario(utente.getIdUtente());
+            Candidatura candidatura = new Candidatura(nomeCandidatura, descrizioneCandidatura);
+            candidatura.setProprietario(utente.getIdUtente());
 
-            oggetto = oggettoEJB.creaOggetto(oggetto);
+            candidatura = candidaturaEJB.creaCandidatura(candidatura);
 
-            if (oggetto != null) {
+            if (candidatura != null) {
                 RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboardUtente.jsp");
                 dispatcher.forward(request, response);
             } else {
-                RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/registrazioneOggetto.jsp");
+                RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/registrazioneCandidatura.jsp");
                 dispatcher.forward(request, response);
             }
         } else {

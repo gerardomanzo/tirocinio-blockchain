@@ -1,8 +1,8 @@
-<%@page import="bean.Oggetto"%>
+<%@page import="bean.Candidatura"%>
 <%@page import="bean.Partecipazione"%>
 <%@page import="bean.Voto"%>
 <%@page import="bean.Utente"%>
-<%@page import="bean.Evento"%>
+<%@page import="bean.Votazione"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -51,7 +51,7 @@
                             List<Voto> lista = (List<Voto>) session.getAttribute("voti");
                             List<Utente> utenti = (List<Utente>) session.getAttribute("utenti");
                             List<Partecipazione> partecipazioni = (List<Partecipazione>) session.getAttribute("partecipazioni");
-                            List<Oggetto> oggetti = (List<Oggetto>) session.getAttribute("oggetti");
+                            List<Candidatura> candidature = (List<Candidatura>) session.getAttribute("candidature");
                             if (lista != null && lista.size() > 0) {
                         %>
                         <table class="table table-bordered">
@@ -74,10 +74,10 @@
                                     for (Partecipazione p : partecipazioni) {
                                 %>
                                 <tr>
-                                    <% for (Oggetto o: oggetti){
-                                        if(p.getIdOggetto().contains(o.getIdOggetto())) {
+                                    <% for (Candidatura o: candidature){
+                                        if(p.getIdCandidatura().contains(o.getIdCandidatura())) {
                                     %>
-                                    <td><%=o.getNomeOggetto()%></td>
+                                    <td><%=o.getNomeCandidatura()%></td>
                                     <% }
                                             }  
                                         %>

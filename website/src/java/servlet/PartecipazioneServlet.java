@@ -1,11 +1,11 @@
 package servlet;
 
-import bean.Evento;
-import bean.Oggetto;
+import bean.Votazione;
+import bean.Candidatura;
 import bean.Partecipazione;
 import bean.Utente;
-import ejb.EventoEJB;
-import ejb.OggettoEJB;
+import ejb.VotazioneEJB;
+import ejb.CandidaturaEJB;
 import ejb.PartecipazioneEJB;
 import java.io.IOException;
 import java.util.List;
@@ -20,9 +20,9 @@ import javax.servlet.http.HttpSession;
 public class PartecipazioneServlet extends HttpServlet {
 
     @Inject
-    private EventoEJB eventoEJB;
+    private VotazioneEJB votazioneEJB;
     @Inject
-    private OggettoEJB oggettoEJB;
+    private CandidaturaEJB candidaturaEJB;
     @Inject
     private PartecipazioneEJB partecipazioneEJB;
 
@@ -33,12 +33,12 @@ public class PartecipazioneServlet extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("utente");
 
         if (utente != null) {
-            List<Evento> lista = eventoEJB.cercaEventi();
+            List<Votazione> lista = votazioneEJB.cercaVotazioni();
 
-            session.removeAttribute("eventi");
-            session.setAttribute("eventi", lista);
+            session.removeAttribute("votazioni");
+            session.setAttribute("votazioni", lista);
 
-            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/selezionaEvento.jsp");
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/selezionaVotazione.jsp");
             dispatcher.forward(request, response);
 
         } else {
@@ -52,44 +52,42 @@ public class PartecipazioneServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         Utente utente = (Utente) session.getAttribute("utente");
-        String idEvento;
+        String idVotazione;
 
         String action = request.getParameter("action");
         if (utente != null) {
-            if (action.equalsIgnoreCase("visualizzaOggetti")) {
-                idEvento = request.getParameter("idEvento");
+            if (action.equalsIgnoreCase("visualizzaCandidature")) {
+                idVotazione = request.getParameter("idVotazione");
 
-                List<Oggetto> lista = oggettoEJB.cercaTuttiGliOggetti(idEvento, utente.getIdUtente());
+                List<Candidatura> lista = candidaturaEJB.cercaTutteLeCandidature(idVotazione, utente.getIdUtente());
 
-                session.removeAttribute("oggetti");
-                session.setAttribute("oggetti", lista);
+                session.removeAttribute("candidature");
+                session.setAttribute("candidature", lista);
 
-                session.removeAttribute("idEvento");
-                session.setAttribute("idEvento", idEvento);
+                session.removeAttribute("idVotazione");
+                session.setAttribute("idVotazione", idVotazione);
 
-                RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/selezionaOggetto.jsp");
+                RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/selezionaCandidatura.jsp");
                 dispatcher.forward(request, response);
 
             } else if (action.equalsIgnoreCase("InserisciPartecipazione")) {
-                System.out.println("InserisciPartecipazione");
-                idEvento = (String) session.getAttribute("idEvento");
+                idVotazione = (String) session.getAttribute("idVotazione");
 
-                String idOggetto = request.getParameter("idOggetto");
+                String idCandidatura = request.getParameter("idCandidatura");
 
-                Partecipazione part = new Partecipazione(idEvento, idOggetto);
+                Partecipazione part = new Partecipazione(idVotazione, idCandidatura);
                 part = partecipazioneEJB.creaPartecipazione(part);
 
                 if (part != null) {
                     RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboardUtente.jsp");
                     dispatcher.forward(request, response);
                 } else {
-                    RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/selezionaOggetto.jsp");
+                    RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/selezionaCandidatura.jsp");
                     dispatcher.forward(request, response);
                 }
             }
 
         } else {
-            System.out.println("ELSE");
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboardUtente.jsp");
             dispatcher.forward(request, response);
         }

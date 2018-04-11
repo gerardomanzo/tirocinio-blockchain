@@ -1,10 +1,8 @@
 package ejb;
 
-import bean.Oggetto;
+import bean.Candidatura;
 import bean.Partecipazione;
-import bean.Utente;
 import com.google.gson.Gson;
-import static ejb.UtenteEJB.URI_BASE;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +19,7 @@ import javax.ws.rs.core.UriBuilder;
 
 @Stateless
 @LocalBean
-public class OggettoEJB {
+public class CandidaturaEJB {
 
     public final static URI URI_QUERY = UriBuilder.fromUri("http://localhost:3000/api/queries").build();
     public final static URI URI_BASE = UriBuilder.fromUri("http://localhost:3000/api").build();
@@ -32,67 +30,67 @@ public class OggettoEJB {
 
     private final Gson gson = new Gson();
 
-    public Oggetto creaOggetto(Oggetto oggetto) {
+    public Candidatura creaCandidatura(Candidatura candidatura) {
 
-        Response response = CLIENT.target(URI_QUERY + "/findByNomeOggetto")
-                .queryParam("param", oggetto.getNomeOggetto())
+        Response response = CLIENT.target(URI_QUERY + "/findByNomeCandidatura")
+                .queryParam("param", candidatura.getNomeCandidatura())
                 .request()
                 .get();
 
         String body = response.readEntity(String.class);
 
-        Oggetto[] result = gson.fromJson(body, Oggetto[].class);
+        Candidatura[] result = gson.fromJson(body, Candidatura[].class);
 
         if (result.length == 0) {
-            oggetto.setIdOggetto(idGen.nextId());
+            candidatura.setIdCandidatura(idGen.nextId());
 
-            String json = gson.toJson(oggetto);
+            String json = gson.toJson(candidatura);
 
-            response = CLIENT.target(URI_BASE + "/Oggetto")
+            response = CLIENT.target(URI_BASE + "/Candidatura")
                     .request()
                     .post(Entity.entity(json, MediaType.APPLICATION_JSON));
-            return oggetto;
+            return candidatura;
         }
         return null;
     }
 
-    public List<Oggetto> cercaOggettiNonRegistrati() {
+    public List<Candidatura> cercaCandidatureNonRegistrati() {
         Response response = CLIENT.target(URI_QUERY + "/findObjectNotRegistred")
                 .request()
                 .get();
 
         String body = response.readEntity(String.class);
 
-        Oggetto[] result = gson.fromJson(body, Oggetto[].class);
+        Candidatura[] result = gson.fromJson(body, Candidatura[].class);
 
         return Arrays.asList(result);
 
     }
 
-    public void confermaOggetto(String idOggetto) {
-        String json = "{\"oggetto\": \"resource:it.unisa.Oggetto#" + idOggetto + "\"}";
+    public void confermaCandidatura(String idCandidatura) {
+        String json = "{\"candidatura\": \"resource:it.unisa.Candidatura#" + idCandidatura + "\"}";
 
-        Response response = CLIENT.target(URI_BASE + "/ConfermaRegistrazioneOggetto")
+        Response response = CLIENT.target(URI_BASE + "/ConfermaRegistrazioneCandidatura")
                 .request()
                 .post(Entity.entity(json, MediaType.APPLICATION_JSON));
 
     }
 
-    public List<Oggetto> cercaTuttiGliOggetti(String idEvento, String idUtente) {
+    public List<Candidatura> cercaTutteLeCandidature(String idVotazione, String idUtente) {
 
-        Response response = CLIENT.target(URI_BASE + "/Oggetto")
+        Response response = CLIENT.target(URI_BASE + "/Candidatura")
                 .request()
                 .get();
 
         String body = response.readEntity(String.class);
 
-        Oggetto[] oggetti = gson.fromJson(body, Oggetto[].class);
+        Candidatura[] candidature = gson.fromJson(body, Candidatura[].class);
 
-        List<Oggetto> oggettiUtente = new ArrayList<>();
+        List<Candidatura> candidatureUtente = new ArrayList<>();
 
-        for (Oggetto o : oggetti) {
+        for (Candidatura o : candidature) {
             if (o.getProprietario().contains(idUtente)) {
-                oggettiUtente.add(o);
+                candidatureUtente.add(o);
             }
         }
 
@@ -104,23 +102,23 @@ public class OggettoEJB {
 
         Partecipazione[] partecipazioni = gson.fromJson(body, Partecipazione[].class);
 
-        List<Partecipazione> partecipazioniEvento = new ArrayList<>();
+        List<Partecipazione> partecipazioniVotazione = new ArrayList<>();
 
         for (Partecipazione o : partecipazioni) {
-            if (o.getIdEvento().contains(idEvento)) {
-                partecipazioniEvento.add(o);
+            if (o.getIdVotazione().contains(idVotazione)) {
+                partecipazioniVotazione.add(o);
             }
         }
 
-        List<Oggetto> lista = new ArrayList<>();
+        List<Candidatura> lista = new ArrayList<>();
 
         Boolean trovato;
 
-        for (Oggetto o : oggettiUtente) {
+        for (Candidatura o : candidatureUtente) {
             trovato = false;
 
-            for (Partecipazione p : partecipazioniEvento) {
-                if (p.getIdOggetto().contains(o.getIdOggetto())) {
+            for (Partecipazione p : partecipazioniVotazione) {
+                if (p.getIdCandidatura().contains(o.getIdCandidatura())) {
                     trovato = true;
                 }
             }
@@ -133,13 +131,13 @@ public class OggettoEJB {
         return lista;
     }
     
-    public List<Oggetto> cercaGliOggetti() {
-        Response response = CLIENT.target(URI_BASE + "/Oggetto")
+    public List<Candidatura> cercaGliCandidature() {
+        Response response = CLIENT.target(URI_BASE + "/Candidatura")
                 .request()
                 .get();
 
         String body = response.readEntity(String.class);
-        Oggetto[] result = gson.fromJson(body, Oggetto[].class);
+        Candidatura[] result = gson.fromJson(body, Candidatura[].class);
 
         return Arrays.asList(result);
     }

@@ -1,9 +1,8 @@
 package ejb;
 
-import bean.Oggetto;
+import bean.Candidatura;
 import bean.Partecipazione;
 import com.google.gson.Gson;
-import static ejb.VotoEJB.URI_BASE;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public class PartecipazioneEJB {
                 .post(Entity.entity(json, MediaType.APPLICATION_JSON));
     }
 
-    public List<Oggetto> cercaOggettiEvento(String idEvento) {
+    public List<Candidatura> cercaCandidatureVotazione(String idVotazione) {
         Response response = CLIENT.target(URI_BASE + "/Partecipazione")
                 .request()
                 .get();
@@ -74,29 +73,29 @@ public class PartecipazioneEJB {
 
         Partecipazione[] partecipazioni = gson.fromJson(body, Partecipazione[].class);
 
-        List<Oggetto> lista = new ArrayList<>();
+        List<Candidatura> lista = new ArrayList<>();
 
         for (Partecipazione p : partecipazioni) {
 
-            if (p.getIdEvento().contains(idEvento)) {
-                String idOggetto = p.getIdOggetto().substring(26, 34);
+            if (p.getIdVotazione().contains(idVotazione)) {
+                String idCandidatura = p.getIdCandidatura().substring(30, 38);
 
-                response = CLIENT.target(URI_BASE + "/Oggetto/" + idOggetto)
+                response = CLIENT.target(URI_BASE + "/Candidatura/" + idCandidatura)
                         .request()
                         .get();
 
                 body = response.readEntity(String.class);
 
-                Oggetto oggetto = gson.fromJson(body, Oggetto.class);
+                Candidatura candidatura = gson.fromJson(body, Candidatura.class);
 
-                lista.add(oggetto);
+                lista.add(candidatura);
             }
         }
 
         return lista;
     }
 
-    public Partecipazione cercaPartecipazione(String idEvento, String idOggetto) {
+    public Partecipazione cercaPartecipazione(String idVotazione, String idCandidatura) {
         Response response = CLIENT.target(URI_BASE + "/Partecipazione")
                 .request()
                 .get();
@@ -106,7 +105,7 @@ public class PartecipazioneEJB {
         Partecipazione[] partecipazioni = gson.fromJson(body, Partecipazione[].class);
 
         for (Partecipazione p : partecipazioni) {
-            if (p.getIdEvento().contains(idEvento) && p.getIdOggetto().contains(idOggetto)) {
+            if (p.getIdVotazione().contains(idVotazione) && p.getIdCandidatura().contains(idCandidatura)) {
                 return p;
             }
         }
@@ -114,7 +113,7 @@ public class PartecipazioneEJB {
         return null;
     }
     
-    public List<Partecipazione> cercaPartecipazioniByIdEvento(String idEvento) {
+    public List<Partecipazione> cercaPartecipazioniByIdVotazione(String idVotazione) {
         Response response = CLIENT.target(URI_BASE + "/Partecipazione")
                 .request()
                 .get();
@@ -124,7 +123,7 @@ public class PartecipazioneEJB {
         Partecipazione[] partecipazioni = gson.fromJson(body, Partecipazione[].class);
         List<Partecipazione> listaPartecipazioni = new ArrayList<>();
         for (Partecipazione p : partecipazioni) {
-            if(p.getIdEvento().contains(idEvento)){
+            if(p.getIdVotazione().contains(idVotazione)){
                listaPartecipazioni.add(p);
             }
         }

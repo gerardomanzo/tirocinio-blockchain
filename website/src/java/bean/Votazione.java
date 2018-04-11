@@ -2,36 +2,36 @@ package bean;
 
 import java.util.List;
 
-public class Evento {
+public class Votazione {
 
-    private String idEvento;
-    private String nomeEvento;
+    private String idVotazione;
+    private String nomeVotazione;
     private String descrizione;
     private String dataInizio;
     private String dataFine;
     private List<String> criteri;
 
-    public Evento(String nomeEvento, String descrizione, String dataInizio, String dataFine) {
-        this.nomeEvento = nomeEvento;
+    public Votazione(String nomeVotazione, String descrizione, String dataInizio, String dataFine) {
+        this.nomeVotazione = nomeVotazione;
         this.descrizione = descrizione;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
     }
 
-    public String getIdEvento() {
-        return idEvento;
+    public String getIdVotazione() {
+        return idVotazione;
     }
 
-    public void setIdEvento(String idEvento) {
-        this.idEvento = idEvento;
+    public void setIdVotazione(String idVotazione) {
+        this.idVotazione = idVotazione;
     }
 
-    public String getNomeEvento() {
-        return nomeEvento;
+    public String getNomeVotazione() {
+        return nomeVotazione;
     }
 
-    public void setNomeEvento(String nomeEvento) {
-        this.nomeEvento = nomeEvento;
+    public void setNomeVotazione(String nomeVotazione) {
+        this.nomeVotazione = nomeVotazione;
     }
 
     public String getDescrizione() {

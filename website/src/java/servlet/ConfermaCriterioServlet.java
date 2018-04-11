@@ -1,6 +1,6 @@
 package servlet;
 
-import ejb.EventoEJB;
+import ejb.VotazioneEJB;
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 public class ConfermaCriterioServlet extends HttpServlet {
 
     @Inject
-    private EventoEJB eventoEJB;
+    private VotazioneEJB votazioneEJB;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,11 +23,11 @@ public class ConfermaCriterioServlet extends HttpServlet {
 
         if (isAdminLogged) {
 
-            String idEvento = (String) session.getAttribute("idEvento");
+            String idVotazione = (String) session.getAttribute("idVotazione");
 
             String idCriterio = request.getParameter("idCriterio");
 
-            eventoEJB.aggiungiCriterio(idEvento, idCriterio);
+            votazioneEJB.aggiungiCriterio(idVotazione, idCriterio);
 
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboardAdmin.jsp");
             dispatcher.forward(request, response);

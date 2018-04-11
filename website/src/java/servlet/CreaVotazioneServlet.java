@@ -1,7 +1,7 @@
 package servlet;
 
-import bean.Evento;
-import ejb.EventoEJB;
+import bean.Votazione;
+import ejb.VotazioneEJB;
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class CreaEventoServlet extends HttpServlet {
+public class CreaVotazioneServlet extends HttpServlet {
 
     @Inject
-    private EventoEJB eventoEJB;
+    private VotazioneEJB votazioneEJB;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,21 +23,21 @@ public class CreaEventoServlet extends HttpServlet {
         Boolean isAdminLogged = (Boolean) session.getAttribute("loginAdmin");
 
         if (isAdminLogged) {
-            String nomeEvento = request.getParameter("nomeEvento");
+            String nomeVotazione = request.getParameter("nomeVotazione");
             String descrizione = request.getParameter("descrizione");
 
             String dataInizio = request.getParameter("dataInizio");
             String dataFine = request.getParameter("dataFine");
 
-            Evento evento = new Evento(nomeEvento, descrizione, dataInizio, dataFine);
+            Votazione votazione = new Votazione(nomeVotazione, descrizione, dataInizio, dataFine);
 
-            evento = eventoEJB.creaEvento(evento);
+            votazione = votazioneEJB.creaVotazione(votazione);
 
-            if (evento != null) {
+            if (votazione != null) {
                 RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboardAdmin.jsp");
                 dispatcher.forward(request, response);
             } else {
-                RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/creaEvento.jsp");
+                RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/creaVotazione.jsp");
                 dispatcher.forward(request, response);
             }
         } else {

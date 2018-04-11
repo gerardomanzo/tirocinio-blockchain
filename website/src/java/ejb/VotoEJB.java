@@ -1,10 +1,9 @@
 package ejb;
 
-import bean.Evento;
 import bean.Partecipazione;
+import bean.Votazione;
 import bean.Voto;
 import com.google.gson.Gson;
-import static ejb.PartecipazioneEJB.URI_BASE;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
+
 
 @Stateless
 @LocalBean
@@ -31,14 +31,14 @@ public class VotoEJB {
 
     private final Gson gson = new Gson();
 
-    public List<Evento> cercaEventiVoto(String idUtente) {
-        Response response = CLIENT.target(URI_BASE + "/Evento")
+    public List<Votazione> cercaVotazioniVoto(String idUtente) {
+        Response response = CLIENT.target(URI_BASE + "/Votazione")
                 .request()
                 .get();
 
         String body = response.readEntity(String.class);
 
-        Evento[] eventi = gson.fromJson(body, Evento[].class);
+        Votazione[] votazioni = gson.fromJson(body, Votazione[].class);
 
         response = CLIENT.target(URI_BASE + "/Partecipazione")
                 .request()
@@ -58,14 +58,14 @@ public class VotoEJB {
 
         Boolean trovato;
 
-        List<Evento> lista = new ArrayList<>();
+        List<Votazione> lista = new ArrayList<>();
 
-        for (Evento e : eventi) {
+        for (Votazione e : votazioni) {
             trovato = false;
             Partecipazione p = null;
 
             for (int i = 0; i < partecipazioni.length && !trovato; i++) {
-                if (partecipazioni[i].getIdEvento().contains(e.getIdEvento())) {
+                if (partecipazioni[i].getIdVotazione().contains(e.getIdVotazione())) {
                     trovato = true;
                     p = partecipazioni[i];
                 }

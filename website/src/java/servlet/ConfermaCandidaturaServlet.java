@@ -1,7 +1,7 @@
 package servlet;
 
-import bean.Oggetto;
-import ejb.OggettoEJB;
+import bean.Candidatura;
+import ejb.CandidaturaEJB;
 import java.io.IOException;
 import java.util.List;
 import javax.inject.Inject;
@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class ConfermaOggettoServlet extends HttpServlet {
+public class ConfermaCandidaturaServlet extends HttpServlet {
 
     @Inject
-    private OggettoEJB oggettoEJB;
+    private CandidaturaEJB candidaturaEJB;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,12 +25,12 @@ public class ConfermaOggettoServlet extends HttpServlet {
         Boolean isAdminLogged = (Boolean) session.getAttribute("loginAdmin");
 
         if (isAdminLogged) {
-            List<Oggetto> lista = oggettoEJB.cercaOggettiNonRegistrati();
+            List<Candidatura> lista = candidaturaEJB.cercaCandidatureNonRegistrati();
 
-            session.removeAttribute("oggettiNonRegistrati");
-            session.setAttribute("oggettiNonRegistrati", lista);
+            session.removeAttribute("candidatureNonRegistrati");
+            session.setAttribute("candidatureNonRegistrati", lista);
 
-            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/confermaOggetto.jsp");
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/confermaCandidatura.jsp");
             dispatcher.forward(request, response);
 
         } else {
@@ -47,18 +47,18 @@ public class ConfermaOggettoServlet extends HttpServlet {
         Boolean isAdminLogged = (Boolean) session.getAttribute("loginAdmin");
 
         if (isAdminLogged) {
-            String idOggetto = request.getParameter("idOggetto");
+            String idCandidatura = request.getParameter("idCandidatura");
 
-            if (idOggetto != null && !idOggetto.equals("")) {
-                oggettoEJB.confermaOggetto(idOggetto);
+            if (idCandidatura != null && !idCandidatura.equals("")) {
+                candidaturaEJB.confermaCandidatura(idCandidatura);
             }
 
-            List<Oggetto> lista = oggettoEJB.cercaOggettiNonRegistrati();
+            List<Candidatura> lista = candidaturaEJB.cercaCandidatureNonRegistrati();
 
-            session.removeAttribute("oggettiNonRegistrati");
-            session.setAttribute("oggettiNonRegistrati", lista);
+            session.removeAttribute("candidatureNonRegistrati");
+            session.setAttribute("candidatureNonRegistrati", lista);
 
-            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/confermaOggetto.jsp");
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/confermaCandidatura.jsp");
             dispatcher.forward(request, response);
         } else {
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/dashboardAdmin.jsp");
